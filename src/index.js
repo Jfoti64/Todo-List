@@ -6,17 +6,17 @@ import * as changeTaskProperty from './changeTaskProperty';
 //                       (title, description, dueDate, completionStatus, important, project)
 let testing = new Task('title1', 'description1', 'dueDate1', true, true, 'project1');
 
-changeTaskProperty.editTitle(testing, 'TITLE2');
+changeTaskProperty.editTitle(testing.index, 'TITLE2');
 
-changeTaskProperty.editDescription(testing, 'DESCRIPTION2');
+changeTaskProperty.editDescription(testing.index, 'DESCRIPTION2');
 
-changeTaskProperty.editDueDate(testing, 'DUEDATE2');
+changeTaskProperty.editDueDate(testing.index, 'DUEDATE2');
 
-changeTaskProperty.editCompletionStatus(testing);
+changeTaskProperty.toggleCompletionStatus(testing.index);
 
-changeTaskProperty.editImportant(testing);
+changeTaskProperty.toggleImportant(testing.index);
 
-changeTaskProperty.editProject(testing, 'PROJECT2');
+changeTaskProperty.editProject(testing.index, 'PROJECT2');
 
 
 

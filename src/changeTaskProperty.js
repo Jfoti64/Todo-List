@@ -1,60 +1,41 @@
 import { getTasksFromStorage } from "./getTasksFromStorage";
-import { populateStorage } from "./populateStorage";
 
-function editTitle(task, newTitle) {
-    const tasks = getTasksFromStorage();
-    const index = task.index;
-
-    tasks[index].title = newTitle;
-
-    localStorage.setItem('tasks', JSON.stringify(tasks));
+function updateTasksInStorage(updatedTasks) {
+    localStorage.setItem('tasks', JSON.stringify(updatedTasks));
 }
 
-function editDescription(task, newDescription) {
+function editTaskProperty(taskIndex, propertyName, newValue) {
     const tasks = getTasksFromStorage();
-    const index = task.index;
-
-    tasks[index].description = newDescription;
-
-    localStorage.setItem('tasks', JSON.stringify(tasks));
+    tasks[taskIndex][propertyName] = newValue;
+    updateTasksInStorage(tasks);
 }
 
-function editDueDate(task, newDueDate) {
-    const tasks = getTasksFromStorage();
-    const index = task.index;
-
-    tasks[index].dueDate = newDueDate;
-
-    localStorage.setItem('tasks', JSON.stringify(tasks));
+function editTitle(taskIndex, newTitle) {
+    editTaskProperty(taskIndex, 'title', newTitle);
 }
 
-function editCompletionStatus(task) {
-    const tasks = getTasksFromStorage();
-    const index = task.index;
-
-    tasks[index].completionStatus = tasks[index].completionStatus ? false: true;
-
-    localStorage.setItem('tasks', JSON.stringify(tasks));
+function editDescription(taskIndex, newDescription) {
+    editTaskProperty(taskIndex, 'description', newDescription);
 }
 
-function editImportant(task) {
-    const tasks = getTasksFromStorage();
-    const index = task.index;
-
-    tasks[index].important = tasks[index].important ? false: true;
-
-    localStorage.setItem('tasks', JSON.stringify(tasks));
+function editDueDate(taskIndex, newDueDate) {
+    editTaskProperty(taskIndex, 'dueDate', newDueDate);
 }
 
-function editProject(task, newProject) {
+function toggleCompletionStatus(taskIndex) {
     const tasks = getTasksFromStorage();
-    const index = task.index;
-
-    tasks[index].project = newProject;
-
-    localStorage.setItem('tasks', JSON.stringify(tasks));
+    tasks[taskIndex].completionStatus = !tasks[taskIndex].completionStatus;
+    updateTasksInStorage(tasks);
 }
 
+function toggleImportant(taskIndex) {
+    const tasks = getTasksFromStorage();
+    tasks[taskIndex].important = !tasks[taskIndex].important;
+    updateTasksInStorage(tasks);
+}
 
+function editProject(taskIndex, newProject) {
+    editTaskProperty(taskIndex, 'project', newProject);
+}
 
-export { editTitle, editDescription, editDueDate, editCompletionStatus, editImportant, editProject }
+export { editTitle, editDescription, editDueDate, toggleCompletionStatus, toggleImportant, editProject };
