@@ -17,13 +17,19 @@ module.exports = {
     ],
   },
   devServer: {
-    static: './dist'
+    watchFiles: {
+        paths: ['src/**/*.php', 'public/**/*'],
+        options: {
+          usePolling: false,
+        },
+      },
   },
+  devtool: 'inline-source-map',
   plugins: [
     new HtmlWebpackPlugin({
-        template: './src/template.html',
+        template: './src/index.html',
         filename: 'index.html',
-            inject: 'body',
+        inject: 'body',
     }),
   ],
 };
