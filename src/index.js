@@ -1,8 +1,11 @@
 import { Task } from './tasks';
-import { getFromStorage } from './getFromStorage';
+import { getTasksFromStorage } from './getTasksFromStorage';
+import { populateStorage } from './populateStorage';
 
-let testing = new Task('title1', 'description1', 'dueDate1', 'false1', 'false1', 1);
+//let testing = new Task('title1', 'description1', 'dueDate1', 'false1', 'false1', 0);
 
-let firstTry = getFromStorage('1');
+let firstTry = getTasksFromStorage();
 
-console.log(firstTry);
+// Log first object's title in tasks array from local storage
+console.log(firstTry[0].title);
+
