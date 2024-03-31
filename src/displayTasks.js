@@ -1,4 +1,5 @@
 import { getTasksFromStorage } from "./getTasksFromStorage";
+import { format } from "date-fns";
 
 function displayAllTasksTab() {
     const allTasks = getTasksFromStorage();
@@ -12,6 +13,17 @@ function displayImportantTab() {
     const allTasks = getTasksFromStorage();
     allTasks.forEach(obj => {
         if (obj.important == true) {
+            createNewTaskCard(obj);
+        }
+    });
+}
+
+function displayDueTodayTab() {
+    const today = format(new Date(), "MM/dd/yyyy");
+
+    const allTasks = getTasksFromStorage();
+    allTasks.forEach(obj => {
+        if (obj.dueDate == today) {
             createNewTaskCard(obj);
         }
     });
@@ -52,4 +64,4 @@ function createNewTaskCard(obj) {
     tasksContainer.appendChild(taskCard);
 }
 
-export { displayAllTasksTab, displayImportantTab }
+export { displayAllTasksTab, displayImportantTab, displayDueTodayTab }

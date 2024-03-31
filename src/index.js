@@ -15,21 +15,11 @@ const formattedDate = format(specifiedDate, 'MM/dd/yyyy');
 //                       (title, description, dueDate, completionStatus, important, project)
 let testing = new Task('title1', 'description1', formattedDate, true, true, 'project1');
 
-changeTaskProperty.editTitle(testing.index, 'TITLE2');
-
-changeTaskProperty.editDescription(testing.index, 'DESCRIPTION2');
-
-//changeTaskProperty.editDueDate(testing.index, 'DUEDATE2');
-
-changeTaskProperty.toggleCompletionStatus(testing.index);
-
-//changeTaskProperty.toggleImportant(testing.index);
-
-changeTaskProperty.editProject(testing.index, 'PROJECT2');
-
 //displayAllTasksTab();
 
-displayTasks.displayImportantTab();
+//displayTasks.displayImportantTab();
+
+displayTasks.displayDueTodayTab();
 
 let firstTry = getTasksFromStorage();
 
