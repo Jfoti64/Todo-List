@@ -3,7 +3,7 @@ import { Task } from './tasks';
 import { getTasksFromStorage } from './getTasksFromStorage';
 import { populateStorage } from './populateStorage';
 import * as changeTaskProperty from './changeTaskProperty';
-import { displayAllTasksTab } from "./displayAlltasksTab";
+import * as displayTasks from "./displayTasks";
 import { format } from "date-fns";
 
 // Specify the date: February 11, 2014
@@ -23,11 +23,13 @@ changeTaskProperty.editDescription(testing.index, 'DESCRIPTION2');
 
 changeTaskProperty.toggleCompletionStatus(testing.index);
 
-changeTaskProperty.toggleImportant(testing.index);
+//changeTaskProperty.toggleImportant(testing.index);
 
 changeTaskProperty.editProject(testing.index, 'PROJECT2');
 
-displayAllTasksTab();
+//displayAllTasksTab();
+
+displayTasks.displayImportantTab();
 
 let firstTry = getTasksFromStorage();
 

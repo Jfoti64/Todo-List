@@ -8,6 +8,15 @@ function displayAllTasksTab() {
     });
 }
 
+function displayImportantTab() {
+    const allTasks = getTasksFromStorage();
+    allTasks.forEach(obj => {
+        if (obj.important == true) {
+            createNewTaskCard(obj);
+        }
+    });
+}
+
 function createNewTaskCard(obj) {
     const tasksContainer = document.getElementById('currentTasks');
     // Create the task card
@@ -43,4 +52,4 @@ function createNewTaskCard(obj) {
     tasksContainer.appendChild(taskCard);
 }
 
-export { displayAllTasksTab }
+export { displayAllTasksTab, displayImportantTab }
