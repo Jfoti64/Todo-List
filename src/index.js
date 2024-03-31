@@ -2,15 +2,22 @@ import { Task } from './tasks';
 import { getTasksFromStorage } from './getTasksFromStorage';
 import { populateStorage } from './populateStorage';
 import * as changeTaskProperty from './changeTaskProperty';
+import { format } from "date-fns";
+
+// Specify the date: February 11, 2014
+const specifiedDate = new Date(2014, 1, 11);
+
+// Format the specified date
+const formattedDate = format(specifiedDate, 'MM/dd/yyyy');
 
 //                       (title, description, dueDate, completionStatus, important, project)
-let testing = new Task('title1', 'description1', 'dueDate1', true, true, 'project1');
+let testing = new Task('title1', 'description1', formattedDate, true, true, 'project1');
 
 changeTaskProperty.editTitle(testing.index, 'TITLE2');
 
 changeTaskProperty.editDescription(testing.index, 'DESCRIPTION2');
 
-changeTaskProperty.editDueDate(testing.index, 'DUEDATE2');
+//changeTaskProperty.editDueDate(testing.index, 'DUEDATE2');
 
 changeTaskProperty.toggleCompletionStatus(testing.index);
 
