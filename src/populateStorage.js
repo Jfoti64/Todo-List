@@ -2,6 +2,12 @@ function populateStorage(task) {
     // Retrieve existing tasks array from localStorage (or initialize an empty array)
     let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
+    let projects = JSON.parse(localStorage.getItem('projects')) || [];
+
+    projects.push(task.project);
+
+    localStorage.setItem('projects', JSON.stringify(projects));
+
     // Add the new task to the tasks array
     tasks.push(task);
 

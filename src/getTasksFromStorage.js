@@ -3,4 +3,9 @@ function getTasksFromStorage() {
     return tasks;
 }
 
-export { getTasksFromStorage };
+function getProjectsFromStorage() {
+    const projects = JSON.parse(localStorage.getItem('projects')) || [];
+    return projects;
+}
+
+export { getTasksFromStorage, getProjectsFromStorage };
