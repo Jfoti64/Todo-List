@@ -9,13 +9,6 @@ function updateProjectsInStorage(updatedProjects) {
 }
 
 function editTaskProperty(taskIndex, propertyName, newValue) {
-    if (propertyName === 'project') {
-        const projects = getProjectsFromStorage();
-        if (!projects.includes(newValue)) {
-            projects.push(newValue);
-            updateProjectsInStorage(projects);
-        }
-    }
     const tasks = getTasksFromStorage();
     tasks[taskIndex][propertyName] = newValue;
     updateTasksInStorage(tasks);
@@ -48,6 +41,12 @@ function toggleImportant(taskIndex) {
 
 function editProject(taskIndex, newProject) {
     editTaskProperty(taskIndex, 'project', newProject);
+    const projects = getProjectsFromStorage();
+    if (!projects.includes(newProject)) {
+        projects.push(newProject);
+        updateProjectsInStorage(projects);
+    }
 }
+
 
 export { editTitle, editDescription, editDueDate, toggleCompletionStatus, toggleImportant, editProject };
