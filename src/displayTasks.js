@@ -20,10 +20,20 @@ function displayImportantTab() {
 
 function displayDueTodayTab() {
     const today = format(new Date(), "MM/dd/yyyy");
-
     const allTasks = getTasksFromStorage();
+
     allTasks.forEach(obj => {
         if (obj.dueDate == today) {
+            createNewTaskCard(obj);
+        }
+    });
+}
+
+function displayTasksFromProject(project) {
+    const allTasks = getTasksFromStorage();
+
+    allTasks.forEach(obj => {
+        if (obj.project == project) {
             createNewTaskCard(obj);
         }
     });
@@ -64,4 +74,4 @@ function createNewTaskCard(obj) {
     tasksContainer.appendChild(taskCard);
 }
 
-export { displayAllTasksTab, displayImportantTab, displayDueTodayTab }
+export { displayAllTasksTab, displayImportantTab, displayDueTodayTab, displayTasksFromProject }
