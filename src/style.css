@@ -1,0 +1,43 @@
+html, body {
+    height: 100%;
+    margin: 0px;
+}
+
+body {
+    display: grid;
+    height: 1;
+    grid-template-rows: 80px 100% 50px;
+}
+
+#centerContent {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+}
+
+#leftColumn {
+    display: grid;
+    grid-template-rows: repeat(6, 1fr);
+    border: black solid 5px;
+}
+
+#leftColumn button {
+    height: 50px;
+    width: 150px;
+}
+
+div {
+    background-color: #d61313;
+}
+
+header {
+    background-color: blue;
+}
+
+h3 {
+    font-size: 3rem;
+}
+
+footer {
+    background-color: green;
+}
+

@@ -17,8 +17,9 @@ module.exports = {
     ],
   },
   devServer: {
+    hot: 'only',
     watchFiles: {
-        paths: ['src/**/*.php', 'public/**/*'],
+        paths: ['src/', 'public/**/*'],
         options: {
           usePolling: false,
         },

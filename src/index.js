@@ -1,3 +1,4 @@
+import "./style.css";
 import { Task } from './tasks';
 import { getTasksFromStorage } from './getTasksFromStorage';
 import { populateStorage } from './populateStorage';
