@@ -20,9 +20,18 @@ function createAddTaskInput() {
     addEventListeners.addEventListenerAddTaskInput();
 }
 
+function createProjectName(currentProject) {
+    const tasksContainer = document.getElementById('currentTasks');
+    const projectName = document.createElement('h2');
+    projectName.id = 'projectName';
+    projectName.innerHTML = currentProject;
+    tasksContainer.appendChild(projectName);
+}
+
 function displayAllTasksTab() {
     const allTasks = getTasksFromStorage();
     clearDom();
+    createProjectName('All');
 
     allTasks.forEach(obj => {
         createNewTaskCard(obj);
