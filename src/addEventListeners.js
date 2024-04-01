@@ -12,13 +12,21 @@ function addEventListenerCompletionStatus(completionStatus) {
     });
 }
 
-function addEventListenerAllTasksBtn() {
+(function addEventListenerAllTasksBtn() {
     const allTasksTabBtn = document.getElementById('allTab');
 
     allTasksTabBtn.addEventListener('click', () => {
         displayTasks.displayAllTasksTab();
     });
-}
+})();
+
+(function addEventListenerTodayBtn() {
+    const todayTabBtn = document.getElementById('todayTab');
+
+    todayTabBtn.addEventListener('click', () => {
+            displayTasks.displayDueTodayTab();
+    });
+})();
 
 function addEventListenerAddTaskInput() {
     const addTaskInput = document.getElementById('addTaskInput');
