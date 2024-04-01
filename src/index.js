@@ -15,6 +15,8 @@ const formattedDate = format(specifiedDate, 'MM/dd/yyyy');
 //                       (title, description, dueDate, completionStatus, important, project)
 let testing = new Task('title1', 'description1', formattedDate, true, true, 'project1');
 
+displayTasks.displayAllTasksTab();
+
 
 let firstTry = getTasksFromStorage();
 

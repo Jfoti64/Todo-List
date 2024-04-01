@@ -1,8 +1,15 @@
 import { getTasksFromStorage } from "./getTasksFromStorage";
+import * as addEventListeners from "./addEventListeners";
 import { format } from "date-fns";
+
+function clearDom() {
+    const tasksContainer = document.getElementById('currentTasks');
+    tasksContainer.innerHTML = '';
+}
 
 function displayAllTasksTab() {
     const allTasks = getTasksFromStorage();
+    clearDom();
 
     allTasks.forEach(obj => {
         createNewTaskCard(obj);
@@ -11,6 +18,7 @@ function displayAllTasksTab() {
 
 function displayImportantTab() {
     const allTasks = getTasksFromStorage();
+    clearDom();
     allTasks.forEach(obj => {
         if (obj.important == true) {
             createNewTaskCard(obj);
@@ -21,6 +29,7 @@ function displayImportantTab() {
 function displayDueTodayTab() {
     const today = format(new Date(), "MM/dd/yyyy");
     const allTasks = getTasksFromStorage();
+    clearDom();
 
     allTasks.forEach(obj => {
         if (obj.dueDate == today) {
@@ -31,6 +40,7 @@ function displayDueTodayTab() {
 
 function displayTasksFromProject(project) {
     const allTasks = getTasksFromStorage();
+    clearDom();
 
     allTasks.forEach(obj => {
         if (obj.project == project) {
@@ -44,6 +54,7 @@ function createNewTaskCard(obj) {
     // Create the task card
     const taskCard = document.createElement('div');
     taskCard.classList.add('taskCard');
+    taskCard.setAttribute('data-index', obj.index);
 
     // Create completionStatus checkbox
     const completionStatus = document.createElement('input')
@@ -51,6 +62,9 @@ function createNewTaskCard(obj) {
     completionStatus.classList.add('completionStatus');
     completionStatus.checked = obj.completionStatus;
     taskCard.appendChild(completionStatus);
+
+    addEventListeners.addEventListenerCompletionStatus(completionStatus);
+
 
     // Create title
     const title = document.createElement('h5');
@@ -69,7 +83,6 @@ function createNewTaskCard(obj) {
     dueDate.classList.add('dueDate');
     dueDate.innerHTML = obj.dueDate;
     taskCard.appendChild(dueDate);
-
 
     tasksContainer.appendChild(taskCard);
 }
