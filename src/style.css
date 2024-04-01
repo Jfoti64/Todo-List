@@ -1,7 +1,10 @@
 html, body {
     height: 100%;
-    margin: 0px;
+    margin: 0;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
 }
+
 
 body {
     display: grid;
@@ -37,7 +40,34 @@ h3 {
     font-size: 3rem;
 }
 
+.taskCard h5, .taskCard p {
+    margin: 0px;
+}
+
+#currentTasks {
+    display: grid;
+    gap: 10px;
+}
+
+.taskCard {
+    height: 90px;
+    background-color: rgb(123, 44, 180);
+    display: grid;
+    grid-template-columns: 25px repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    border: solid black 3px;
+}
+
+.completionStatus {
+    grid-row: 1 / -1;
+}
+
+.description, .dueDate {
+    grid-row: 2;
+}
+
 footer {
     background-color: green;
+
 }
 
