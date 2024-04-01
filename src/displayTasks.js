@@ -47,7 +47,6 @@ function displayImportantTab() {
             createNewTaskCard(obj);
         }
     });
-    createAddTaskInput();
 }
 
 function displayDueTodayTab() {

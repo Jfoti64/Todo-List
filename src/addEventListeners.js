@@ -28,6 +28,14 @@ function addEventListenerCompletionStatus(completionStatus) {
     });
 })();
 
+(function addEventListenerImportantBtn() {
+    const importantTabBtn = document.getElementById('importantTab');
+
+    importantTabBtn.addEventListener('click', () => {
+        displayTasks.displayImportantTab();
+    })
+})();
+
 function addEventListenerAddTaskInput() {
     const addTaskInput = document.getElementById('addTaskInput');
 
