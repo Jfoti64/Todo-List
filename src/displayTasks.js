@@ -16,6 +16,7 @@ function createAddTaskInput() {
     const tasksContainer = document.getElementById('currentTasks');
     addTaskInputDiv.appendChild(addTaskInput);
     tasksContainer.appendChild(addTaskInputDiv);
+    addEventListeners.addEventListenerAddTaskInput();
 }
 
 function displayAllTasksTab() {

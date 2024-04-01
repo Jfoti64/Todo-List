@@ -8,5 +8,15 @@ function addEventListenerCompletionStatus(completionStatus) {
     });
 }
 
+function addEventListenerAddTaskInput() {
+    const addTaskInput = document.getElementById('addTaskInput');
 
-export { addEventListenerCompletionStatus }
+    addTaskInput.addEventListener('input', event => {
+        // This function will be called whenever the value of the input changes
+        const inputValue = event.target.value;
+        console.log('Input value:', inputValue);
+    });
+}
+
+
+export { addEventListenerCompletionStatus, addEventListenerAddTaskInput }
