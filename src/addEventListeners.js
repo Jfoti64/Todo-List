@@ -12,9 +12,9 @@ function addEventListenerAddTaskInput() {
     const addTaskInput = document.getElementById('addTaskInput');
 
     addTaskInput.addEventListener('input', event => {
-        // This function will be called whenever the value of the input changes
+        const formattedDate = format(specifiedDate, 'MM/dd/yyyy');
         const inputValue = event.target.value;
-        console.log('Input value:', inputValue);
+        new Task(inputValue, 'description', formattedDate, true, true, '');
     });
 }
 

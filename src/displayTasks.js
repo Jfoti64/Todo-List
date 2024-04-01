@@ -9,6 +9,7 @@ function clearDom() {
 
 function createAddTaskInput() {
     const addTaskInputDiv = document.createElement('div');
+    addTaskInputDiv.id = 'addTaskDiv';
     const addTaskInput = document.createElement('input');
     addTaskInput.id = 'addTaskInput';
     addTaskInput.type = 'text';

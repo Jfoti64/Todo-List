@@ -1,4 +1,4 @@
-html, body {
+ body {
     height: 100%;
     margin: 0;
     display: grid;
@@ -66,9 +66,16 @@ h3 {
     grid-row: 2;
 }
 
+#addTaskDiv {
+    display: grid;
+    grid-template-columns: 25px 1fr;
+    height: 90px;
+}
+
 #addTaskInput {
+    grid-column: 2;
     width: 100%;
-    height: 50px;
+    height: 80px;
 }
 
 footer {
