@@ -4,9 +4,12 @@ function populateStorage(task) {
 
     let projects = JSON.parse(localStorage.getItem('projects')) || [];
 
-    projects.push(task.project);
 
-    localStorage.setItem('projects', JSON.stringify(projects));
+    // Ensure no duplicates in array
+    if (!projects.includes(task.project)) {
+        projects.push(task.project);
+        localStorage.setItem('projects', JSON.stringify(projects));
+    }
 
     // Add the new task to the tasks array
     tasks.push(task);
