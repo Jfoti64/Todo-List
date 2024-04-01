@@ -7,6 +7,17 @@ function clearDom() {
     tasksContainer.innerHTML = '';
 }
 
+function createAddTaskInput() {
+    const addTaskInputDiv = document.createElement('div');
+    const addTaskInput = document.createElement('input');
+    addTaskInput.id = 'addTaskInput';
+    addTaskInput.type = 'text';
+    addTaskInput.placeholder = 'Add Task';
+    const tasksContainer = document.getElementById('currentTasks');
+    addTaskInputDiv.appendChild(addTaskInput);
+    tasksContainer.appendChild(addTaskInputDiv);
+}
+
 function displayAllTasksTab() {
     const allTasks = getTasksFromStorage();
     clearDom();
@@ -14,6 +25,7 @@ function displayAllTasksTab() {
     allTasks.forEach(obj => {
         createNewTaskCard(obj);
     });
+    createAddTaskInput();
 }
 
 function displayImportantTab() {
@@ -24,6 +36,7 @@ function displayImportantTab() {
             createNewTaskCard(obj);
         }
     });
+    createAddTaskInput();
 }
 
 function displayDueTodayTab() {
@@ -36,6 +49,7 @@ function displayDueTodayTab() {
             createNewTaskCard(obj);
         }
     });
+    createAddTaskInput();
 }
 
 function displayTasksFromProject(project) {
@@ -47,6 +61,7 @@ function displayTasksFromProject(project) {
             createNewTaskCard(obj);
         }
     });
+    createAddTaskInput();
 }
 
 function createNewTaskCard(obj) {
