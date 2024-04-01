@@ -43,9 +43,8 @@ function addEventListenerAddTaskInput() {
                 }
                 else {
                     new Task(inputValue, 'description', formattedCurrentDate, false, false, projectName.innerHTML);
-                    event.target.value = ''; // Clear the input field after submitting
-
                 }
+                event.target.value = ''; // Clear the input field after submitting
             }
         }
     });  

@@ -60,7 +60,6 @@ function displayDueTodayTab() {
             createNewTaskCard(obj);
         }
     });
-    createAddTaskInput();
 }
 
 function displayTasksFromProject(project) {
