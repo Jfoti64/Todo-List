@@ -58,5 +58,11 @@ function addEventListenerAddTaskInput() {
     });  
 }
 
+function addEventListenerTaskTitle(taskTitle) {
+    taskTitle.addEventListener('click', () => {
+        displayTasks.editTaskTitle(taskTitle);
+    })
+}
 
-export { addEventListenerCompletionStatus, addEventListenerAddTaskInput }
+
+export { addEventListenerCompletionStatus, addEventListenerAddTaskInput, addEventListenerTaskTitle }

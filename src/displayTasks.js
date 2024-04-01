@@ -1,6 +1,6 @@
 import { getTasksFromStorage } from "./getTasksFromStorage";
 import * as addEventListeners from "./addEventListeners";
-import { format } from "date-fns";
+import { add, format } from "date-fns";
 
 function clearDom() {
     const tasksContainer = document.getElementById('currentTasks');
@@ -73,6 +73,34 @@ function displayTasksFromProject(project) {
     createAddTaskInput();
 }
 
+function editTaskTitle(taskTitle) {
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.value = taskTitle.innerText;
+    input.classList.add('task-title-input');
+
+    taskTitle.parentNode.replaceChild(input, taskTitle);
+
+    input.focus();
+
+    // When the input loses focus, replace it with the <p> element again
+    input.addEventListener('blur', function() {
+        replaceWithText(this);
+    });
+}
+
+function replaceWithText(input) {
+    const title = document.createElement('p');
+    title.innerText = input.value;
+    title.classList.add('title');
+
+    title.addEventListener('click', function() {
+        editTaskTitle(this);
+    });
+
+    input.parentNode.replaceChild(title, input);
+}
+
 function createNewTaskCard(obj) {
     const tasksContainer = document.getElementById('currentTasks');
     // Create the task card
@@ -96,6 +124,8 @@ function createNewTaskCard(obj) {
     title.innerHTML = obj.title;
     taskCard.appendChild(title);
 
+    addEventListeners.addEventListenerTaskTitle(title);
+
     // Create description
     const description = document.createElement('p');
     description.classList.add('description');
@@ -111,4 +141,4 @@ function createNewTaskCard(obj) {
     tasksContainer.appendChild(taskCard);
 }
 
-export { displayAllTasksTab, displayImportantTab, displayDueTodayTab, displayTasksFromProject }
+export { displayAllTasksTab, displayImportantTab, displayDueTodayTab, displayTasksFromProject, editTaskTitle }
