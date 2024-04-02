@@ -108,9 +108,13 @@ function replaceWithText(input) {
 }
 
 const openEditPanel = (taskIndex) => {
-    // Here, taskId is the identifier of the task to be edited
-    // You can use this ID to load and display the task's current details in the panel
-    
+    const tasks = getTasksFromStorage();
+    const taskInStorage = tasks[taskIndex];
+    const taskInStorageDate = taskInStorage.dueDate;
+    const formattedDueDate = format(new Date(taskInStorage.dueDate), 'yyyy-MM-dd');
+    const editDueDate = document.getElementById('editDueDate');
+
+    editDueDate.value = formattedDueDate;
     document.getElementById('taskEditPanel').classList.add('open');
 };
 
