@@ -1,6 +1,7 @@
 import { getTasksFromStorage } from "./getTasksFromStorage";
 import * as addEventListeners from "./addEventListeners";
 import { add, format } from "date-fns";
+import * as changeTaskProperty from "./changeTaskProperty";
 
 function clearDom() {
     const tasksContainer = document.getElementById('currentTasks');
@@ -90,9 +91,13 @@ function editTaskTitle(taskTitle) {
 }
 
 function replaceWithText(input) {
+    const taskCard = input.closest('.taskCard');
+    const dataIndex = taskCard.getAttribute('data-index');
     const title = document.createElement('p');
     title.innerText = input.value;
     title.classList.add('title');
+
+    changeTaskProperty.editTitle(dataIndex, input.value);
 
     title.addEventListener('click', function() {
         editTaskTitle(this);
