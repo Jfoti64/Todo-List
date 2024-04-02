@@ -59,7 +59,7 @@ function addEventListenerAddTaskInput() {
         if (event.key === 'Enter') {
             if (addTaskInput.value !== '') {
                 const projectName = document.getElementById('projectName');
-                const formattedCurrentDate = format(new Date(), 'MM/dd/yyyy');
+                const formattedCurrentDate = format(new Date(), 'yyyy-MM-dd');
                 const inputValue = event.target.value;
                 if (projectName.innerHTML == 'All') {
                     new Task(inputValue, 'description', formattedCurrentDate, false, false, '');
@@ -81,7 +81,7 @@ function addEventListenerTaskTitle(taskTitle) {
 }
 
 // When dueDate p is clicked
-function addEventListenerDueDate(dueDate) {
+/** function addEventListenerDueDate(dueDate) {
     dueDate.addEventListener('blur', function() {
         this.style.display = 'none';
     });
@@ -102,7 +102,7 @@ function addEventListenerDueDate(dueDate) {
             this.style.display = 'none';
         });
     });
-}
+} 
 
 function addEventListenerImportantIcon(icon) {
     icon.addEventListener('click', () => {
@@ -110,9 +110,9 @@ function addEventListenerImportantIcon(icon) {
         const index = taskCard.getAttribute('data-index');
         changeTaskProperty.toggleImportant(index);
     });
-}
+} **/
 
 
 
 
-export { addEventListenerCompletionStatus, addEventListenerAddTaskInput, addEventListenerTaskTitle, addEventListenerDueDate, addEventListenerImportantIcon, addEventListenerTaskCard }
+export { addEventListenerCompletionStatus, addEventListenerAddTaskInput, addEventListenerTaskTitle, addEventListenerTaskCard }

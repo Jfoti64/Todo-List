@@ -53,7 +53,7 @@ function displayImportantTab() {
 }
 
 function displayDueTodayTab() {
-    const today = format(new Date(), "MM/dd/yyyy");
+    const today = format(new Date(), "yyyy-MM-dd");
     const allTasks = getTasksFromStorage();
     clearDom();
 
@@ -157,8 +157,6 @@ function createNewTaskCard(obj) {
     dueDate.innerHTML = obj.dueDate;
     taskCard.appendChild(dueDate);
 
-    addEventListeners.addEventListenerDueDate(dueDate);
-
     // Create date picker for when dueDate clicked
     const today = new Date().toISOString().slice(0, 10); // Converts today's date to YYYY-MM-DD format
     const datePicker = document.createElement('input');
@@ -173,8 +171,6 @@ function createNewTaskCard(obj) {
     importantIcon.classList.add('importantIcon');
     importantIcon.src = importantIconSrc;
     taskCard.appendChild(importantIcon);
-
-    addEventListeners.addEventListenerImportantIcon(importantIcon);
 
 
     tasksContainer.appendChild(taskCard);
