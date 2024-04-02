@@ -64,5 +64,27 @@ function addEventListenerTaskTitle(taskTitle) {
     })
 }
 
+// When dueDate p is clicked
+function addEventListenerDueDate(dueDate) {
+    dueDate.addEventListener('click', (e) => {
+        const taskCard = dueDate.closest('.taskCard');
+        const datePicker = taskCard.querySelector('.datePicker');
+        
+        datePicker.style.display = 'block';
+        datePicker.focus();
 
-export { addEventListenerCompletionStatus, addEventListenerAddTaskInput, addEventListenerTaskTitle }
+        // Setup the event listener for when a new date is selected
+        datePicker.addEventListener('change', function() {
+            // Update the dueDate element with the new date
+            dueDate.textContent = this.value;
+
+            // Hide the date picker
+            this.style.display = 'none';
+        });
+    });
+}
+
+
+
+
+export { addEventListenerCompletionStatus, addEventListenerAddTaskInput, addEventListenerTaskTitle, addEventListenerDueDate }

@@ -102,8 +102,12 @@ function replaceWithText(input) {
     title.addEventListener('click', function() {
         editTaskTitle(this);
     });
-
     input.parentNode.replaceChild(title, input);
+}
+
+function editDueDate(date) {
+    
+    
 }
 
 function createNewTaskCard(obj) {
@@ -143,7 +147,16 @@ function createNewTaskCard(obj) {
     dueDate.innerHTML = obj.dueDate;
     taskCard.appendChild(dueDate);
 
+    addEventListeners.addEventListenerDueDate(dueDate);
+
+    // Create date picker for when dueDate clicked
+    const datePicker = document.createElement('input');
+    datePicker.type = 'date';
+    datePicker.classList.add('datePicker');
+    datePicker.style.display = 'none';
+    taskCard.appendChild(datePicker);
+
     tasksContainer.appendChild(taskCard);
 }
 
-export { displayAllTasksTab, displayImportantTab, displayDueTodayTab, displayTasksFromProject, editTaskTitle }
+export { displayAllTasksTab, displayImportantTab, displayDueTodayTab, displayTasksFromProject, editTaskTitle, editDueDate }
