@@ -2,6 +2,8 @@ import { getTasksFromStorage } from "./getTasksFromStorage";
 import * as addEventListeners from "./addEventListeners";
 import { add, format } from "date-fns";
 import * as changeTaskProperty from "./changeTaskProperty";
+import importantIconSrc from './icons/exclamation-mark-svgrepo-com.svg';
+
 
 function clearDom() {
     const tasksContainer = document.getElementById('currentTasks');
@@ -155,6 +157,12 @@ function createNewTaskCard(obj) {
     datePicker.classList.add('datePicker');
     datePicker.style.display = 'none';
     taskCard.appendChild(datePicker);
+
+    // Create the important signifier
+    const importantIcon = document.createElement('img');
+    importantIcon.classList.add('importantIcon');
+    importantIcon.src = importantIconSrc;
+    taskCard.appendChild(importantIcon);
 
     tasksContainer.appendChild(taskCard);
 }

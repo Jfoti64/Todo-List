@@ -66,6 +66,11 @@ h3 {
     grid-row: 2;
 }
 
+.importantIcon {
+    width: 30px;
+    height: 30px;
+}
+
 #addTaskDiv {
     display: grid;
     grid-template-columns: 25px 1fr;
