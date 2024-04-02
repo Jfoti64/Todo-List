@@ -24,10 +24,6 @@ function addEventListenerEditDueDate(editDueDate, taskIndex) {
     });
 }
 
-document.getElementById('closePanelBtn').addEventListener('click', () => {
-    document.getElementById('taskEditPanel').classList.remove('open');
-});
-
 function addEventListenerCompletionStatus(completionStatus) {
     completionStatus.addEventListener('click', () => {
 
