@@ -12,9 +12,19 @@ function addEventListenerTaskCard(taskCard) {
 }
 
 function addEventListenerImportantToggle(toggleImportant, taskIndex) {
-    toggleImportant.addEventListener('click', () => {
+    // Check if there's an existing event listener stored, and remove it
+    if (toggleImportant._importantClickListener) {
+        toggleImportant.removeEventListener('click', toggleImportant._importantClickListener);
+    }
+
+    // Create a new listener
+    toggleImportant._importantClickListener = () => {
         changeTaskProperty.toggleImportant(taskIndex);
-    });
+        displayTasks.toggleImportantIcon(taskIndex);
+    };
+
+    // Add the new listener
+    toggleImportant.addEventListener('click', toggleImportant._importantClickListener);
 }
 
 function addEventListenerEditDueDate(editDueDate, taskIndex) {

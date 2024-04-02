@@ -92,6 +92,26 @@ function editTaskTitle(taskTitle) {
     });
 }
 
+function toggleImportantIcon(taskIndex) {
+    const tasks = getTasksFromStorage();
+    const task = tasks[taskIndex];
+    const taskCard = document.querySelector(`[data-index='${taskIndex}']`); // Find the corresponding task card in the DOM.
+
+    // Attempt to find an existing important icon within the task card.
+    const existingIcon = taskCard.querySelector('.importantIcon');
+
+    if (task.important) {
+        const importantIcon = document.createElement('img');
+        importantIcon.classList.add('importantIcon');
+        importantIcon.src = importantIconSrc; 
+        importantIcon.alt = 'Important Task';
+        taskCard.appendChild(importantIcon);
+    } else if (existingIcon){
+            existingIcon.remove();
+    }
+}
+
+
 function replaceWithText(input) {
     const taskCard = input.closest('.taskCard');
     const dataIndex = taskCard.getAttribute('data-index');
@@ -186,4 +206,4 @@ function createNewTaskCard(obj) {
     tasksContainer.appendChild(taskCard);
 }
 
-export { displayAllTasksTab, displayImportantTab, displayDueTodayTab, displayTasksFromProject, editTaskTitle, openEditPanel }
+export { displayAllTasksTab, displayImportantTab, displayDueTodayTab, displayTasksFromProject, editTaskTitle, openEditPanel, toggleImportantIcon }
