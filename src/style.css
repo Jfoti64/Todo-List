@@ -62,6 +62,7 @@ h3 {
     grid-row: 1 / -1;
 }
 
+
 .description, .dueDate {
     grid-row: 2;
 }
@@ -70,6 +71,8 @@ h3 {
     width: 30px;
     height: 30px;
 }
+
+.importantIcon
 
 #addTaskDiv {
     display: grid;
@@ -104,5 +107,4 @@ footer {
 .task-edit-panel.open {
     right: 0;
 }
-
 

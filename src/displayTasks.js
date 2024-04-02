@@ -170,12 +170,14 @@ function createNewTaskCard(obj) {
     taskCard.appendChild(datePicker);
 
     // Create the important signifier
-    const importantIcon = document.createElement('img');
-    importantIcon.classList.add('importantIcon');
-    importantIcon.src = importantIconSrc;
-    taskCard.appendChild(importantIcon);
-
-
+    if (obj.important) {
+        const importantIcon = document.createElement('img');
+        importantIcon.classList.add('importantIcon');
+        importantIcon.src = importantIconSrc;
+        importantIcon.alt = 'Important Task';
+        taskCard.appendChild(importantIcon);
+    }
+    
     tasksContainer.appendChild(taskCard);
 }
 
