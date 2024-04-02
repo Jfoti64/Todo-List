@@ -107,7 +107,7 @@ function replaceWithText(input) {
     input.parentNode.replaceChild(title, input);
 }
 
-const openEditPanel = (taskIndex) => {
+const openEditPanel = (taskIndex, event) => {
     const tasks = getTasksFromStorage();
     const taskInStorage = tasks[taskIndex];
     const formattedDueDate = format(new Date(taskInStorage.dueDate), 'yyyy-MM-dd');
@@ -121,6 +121,7 @@ const openEditPanel = (taskIndex) => {
 
     editDueDate.value = formattedDueDate;
     document.getElementById('taskEditPanel').classList.add('open');
+    event.stopPropagation(); // Prevent the click from reaching the document listener
 };
 
 function createNewTaskCard(obj) {

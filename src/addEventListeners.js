@@ -4,9 +4,9 @@ import { format } from "date-fns";
 import * as displayTasks from "./displayTasks";
 
 function addEventListenerTaskCard(taskCard) {
-    taskCard.addEventListener('click', () => {
+    taskCard.addEventListener('click', (event) => {
         const dataIndex = taskCard.getAttribute('data-index');
-        displayTasks.openEditPanel(dataIndex);
+        displayTasks.openEditPanel(dataIndex, event);
     });
 }
 
@@ -33,6 +33,16 @@ function addEventListenerCompletionStatus(completionStatus) {
         changeTaskProperty.toggleCompletionStatus(dataIndex);
     });
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('click', function(event) {
+        const editPanel = document.getElementById('taskEditPanel');
+        if (!editPanel.contains(event.target) && editPanel.classList.contains('open')) {
+            editPanel.classList.remove('open');
+        }
+    });
+});
+
 
 (function addEventListenerAllTasksBtn() {
     const allTasksTabBtn = document.getElementById('allTab');
