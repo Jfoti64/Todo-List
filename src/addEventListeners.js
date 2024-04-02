@@ -84,7 +84,15 @@ function addEventListenerDueDate(dueDate) {
     });
 }
 
+function addEventListenerImportantIcon(icon) {
+    icon.addEventListener('click', () => {
+        const taskCard = icon.closest('.taskCard');
+        const index = taskCard.getAttribute('data-index');
+        changeTaskProperty.toggleImportant(index);
+    });
+}
 
 
 
-export { addEventListenerCompletionStatus, addEventListenerAddTaskInput, addEventListenerTaskTitle, addEventListenerDueDate }
+
+export { addEventListenerCompletionStatus, addEventListenerAddTaskInput, addEventListenerTaskTitle, addEventListenerDueDate, addEventListenerImportantIcon }

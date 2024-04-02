@@ -164,6 +164,9 @@ function createNewTaskCard(obj) {
     importantIcon.src = importantIconSrc;
     taskCard.appendChild(importantIcon);
 
+    addEventListeners.addEventListenerImportantIcon(importantIcon);
+
+
     tasksContainer.appendChild(taskCard);
 }
 
