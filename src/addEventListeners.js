@@ -10,6 +10,12 @@ function addEventListenerTaskCard(taskCard) {
     });
 }
 
+function addEventListenerImportantToggle(toggleImportant, taskIndex) {
+    toggleImportant.addEventListener('click', () => {
+        changeTaskProperty.toggleImportant(taskIndex);
+    });
+}
+
 document.getElementById('saveTaskChanges').addEventListener('click', () => {
     // Logic to save changes
     document.getElementById('taskEditPanel').classList.remove('open');
@@ -115,4 +121,4 @@ function addEventListenerImportantIcon(icon) {
 
 
 
-export { addEventListenerCompletionStatus, addEventListenerAddTaskInput, addEventListenerTaskTitle, addEventListenerTaskCard }
+export { addEventListenerCompletionStatus, addEventListenerAddTaskInput, addEventListenerTaskTitle, addEventListenerTaskCard, addEventListenerImportantToggle }

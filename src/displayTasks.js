@@ -110,9 +110,12 @@ function replaceWithText(input) {
 const openEditPanel = (taskIndex) => {
     const tasks = getTasksFromStorage();
     const taskInStorage = tasks[taskIndex];
-    const taskInStorageDate = taskInStorage.dueDate;
     const formattedDueDate = format(new Date(taskInStorage.dueDate), 'yyyy-MM-dd');
     const editDueDate = document.getElementById('editDueDate');
+    const editImportance = document.getElementById('editImportance');
+    editImportance.checked = taskInStorage.important;
+    addEventListeners.addEventListenerImportantToggle(editImportance, taskIndex);
+
 
     editDueDate.value = formattedDueDate;
     document.getElementById('taskEditPanel').classList.add('open');
