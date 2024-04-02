@@ -117,6 +117,8 @@ const openEditPanel = (taskIndex, event) => {
     taskToEdit.innerHTML = taskInStorage.title;
     editImportance.checked = taskInStorage.important;
     addEventListeners.addEventListenerImportantToggle(editImportance, taskIndex);
+    addEventListeners.addEventListenerEditDueDate(editDueDate, taskIndex);
+
 
 
     editDueDate.value = formattedDueDate;

@@ -2,6 +2,7 @@ import * as changeTaskProperty from "./changeTaskProperty";
 import { Task } from './tasks';
 import { format } from "date-fns";
 import * as displayTasks from "./displayTasks";
+import { getTasksFromStorage } from "./getTasksFromStorage";
 
 function addEventListenerTaskCard(taskCard) {
     taskCard.addEventListener('click', (event) => {
@@ -13,6 +14,13 @@ function addEventListenerTaskCard(taskCard) {
 function addEventListenerImportantToggle(toggleImportant, taskIndex) {
     toggleImportant.addEventListener('click', () => {
         changeTaskProperty.toggleImportant(taskIndex);
+    });
+}
+
+function addEventListenerEditDueDate(editDueDate, taskIndex) {
+    editDueDate.addEventListener('change', function() {
+        const formattedDate = format(this.value, "yyyy-MM-dd")
+        changeTaskProperty.editDueDate(taskIndex, this.value)
     });
 }
 
@@ -92,25 +100,14 @@ function addEventListenerTaskTitle(taskTitle) {
 }
 
 // When dueDate p is clicked
-/** function addEventListenerDueDate(dueDate) {
-    dueDate.addEventListener('blur', function() {
-        this.style.display = 'none';
-    });
-
+/**function addEventListenerDueDate(dueDate) {
     dueDate.addEventListener('click', (e) => {
-        const taskCard = dueDate.closest('.taskCard');
         const datePicker = taskCard.querySelector('.datePicker');
-        
-        datePicker.style.display = 'block';
-        datePicker.focus();
 
         // Setup the event listener for when a new date is selected
         datePicker.addEventListener('change', function() {
             // Update the dueDate element with the new date
             dueDate.textContent = this.value;
-
-            // Hide the date picker
-            this.style.display = 'none';
         });
     });
 } 
@@ -121,9 +118,9 @@ function addEventListenerImportantIcon(icon) {
         const index = taskCard.getAttribute('data-index');
         changeTaskProperty.toggleImportant(index);
     });
-} **/
+} 
+**/
 
 
 
-
-export { addEventListenerCompletionStatus, addEventListenerAddTaskInput, addEventListenerTaskTitle, addEventListenerTaskCard, addEventListenerImportantToggle }
+export { addEventListenerCompletionStatus, addEventListenerAddTaskInput, addEventListenerTaskTitle, addEventListenerTaskCard, addEventListenerImportantToggle, addEventListenerEditDueDate }
