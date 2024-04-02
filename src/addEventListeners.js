@@ -3,6 +3,22 @@ import { Task } from './tasks';
 import { format } from "date-fns";
 import * as displayTasks from "./displayTasks";
 
+function addEventListenerTaskCard(taskCard) {
+    taskCard.addEventListener('click', () => {
+        const dataIndex = taskCard.getAttribute('data-index');
+        displayTasks.openEditPanel(dataIndex);
+    });
+}
+
+document.getElementById('saveTaskChanges').addEventListener('click', () => {
+    // Logic to save changes
+    document.getElementById('taskEditPanel').classList.remove('open');
+});
+
+document.getElementById('closePanelBtn').addEventListener('click', () => {
+    document.getElementById('taskEditPanel').classList.remove('open');
+});
+
 function addEventListenerCompletionStatus(completionStatus) {
     completionStatus.addEventListener('click', () => {
 
@@ -66,6 +82,10 @@ function addEventListenerTaskTitle(taskTitle) {
 
 // When dueDate p is clicked
 function addEventListenerDueDate(dueDate) {
+    dueDate.addEventListener('blur', function() {
+        this.style.display = 'none';
+    });
+
     dueDate.addEventListener('click', (e) => {
         const taskCard = dueDate.closest('.taskCard');
         const datePicker = taskCard.querySelector('.datePicker');
@@ -95,4 +115,4 @@ function addEventListenerImportantIcon(icon) {
 
 
 
-export { addEventListenerCompletionStatus, addEventListenerAddTaskInput, addEventListenerTaskTitle, addEventListenerDueDate, addEventListenerImportantIcon }
+export { addEventListenerCompletionStatus, addEventListenerAddTaskInput, addEventListenerTaskTitle, addEventListenerDueDate, addEventListenerImportantIcon, addEventListenerTaskCard }

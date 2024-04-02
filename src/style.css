@@ -88,3 +88,21 @@ footer {
 
 }
 
+.task-edit-panel {
+    position: fixed;
+    top: 0;
+    right: -100%; /* Start off-screen */
+    width: 300px; /* Or any desired width */
+    height: 100%;
+    background-color: white;
+    box-shadow: -2px 0 5px rgba(0,0,0,0.5);
+    transition: right 0.5s; /* Smooth slide-in effect */
+    padding: 20px;
+}
+
+/* Class to slide in the panel */
+.task-edit-panel.open {
+    right: 0;
+}
+
+

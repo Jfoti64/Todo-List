@@ -107,10 +107,12 @@ function replaceWithText(input) {
     input.parentNode.replaceChild(title, input);
 }
 
-function editDueDate(date) {
+const openEditPanel = (taskIndex) => {
+    // Here, taskId is the identifier of the task to be edited
+    // You can use this ID to load and display the task's current details in the panel
     
-    
-}
+    document.getElementById('taskEditPanel').classList.add('open');
+};
 
 function createNewTaskCard(obj) {
     const tasksContainer = document.getElementById('currentTasks');
@@ -118,6 +120,8 @@ function createNewTaskCard(obj) {
     const taskCard = document.createElement('div');
     taskCard.classList.add('taskCard');
     taskCard.setAttribute('data-index', obj.index);
+
+    addEventListeners.addEventListenerTaskCard(taskCard);
 
     // Create completionStatus checkbox
     const completionStatus = document.createElement('input')
@@ -152,9 +156,11 @@ function createNewTaskCard(obj) {
     addEventListeners.addEventListenerDueDate(dueDate);
 
     // Create date picker for when dueDate clicked
+    const today = new Date().toISOString().slice(0, 10); // Converts today's date to YYYY-MM-DD format
     const datePicker = document.createElement('input');
     datePicker.type = 'date';
     datePicker.classList.add('datePicker');
+    datePicker.value = today;
     datePicker.style.display = 'none';
     taskCard.appendChild(datePicker);
 
@@ -170,4 +176,4 @@ function createNewTaskCard(obj) {
     tasksContainer.appendChild(taskCard);
 }
 
-export { displayAllTasksTab, displayImportantTab, displayDueTodayTab, displayTasksFromProject, editTaskTitle, editDueDate }
+export { displayAllTasksTab, displayImportantTab, displayDueTodayTab, displayTasksFromProject, editTaskTitle, openEditPanel }
