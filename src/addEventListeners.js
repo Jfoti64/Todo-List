@@ -16,11 +16,6 @@ function addEventListenerImportantToggle(toggleImportant, taskIndex) {
     });
 }
 
-document.getElementById('saveTaskChanges').addEventListener('click', () => {
-    // Logic to save changes
-    document.getElementById('taskEditPanel').classList.remove('open');
-});
-
 document.getElementById('closePanelBtn').addEventListener('click', () => {
     document.getElementById('taskEditPanel').classList.remove('open');
 });
