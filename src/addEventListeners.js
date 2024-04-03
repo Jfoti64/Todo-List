@@ -1,8 +1,8 @@
 import * as changeTaskProperty from "./changeTaskProperty";
 import { Task } from './tasks';
-import { format } from "date-fns";
 import * as displayTasks from "./displayTasks";
 import { getTasksFromStorage } from "./getTasksFromStorage";
+import { format } from 'date-fns';
 
 function addEventListenerTaskCard(taskCard) {
     taskCard.addEventListener('click', (event) => {
@@ -29,8 +29,9 @@ function addEventListenerImportantToggle(toggleImportant, taskIndex) {
 
 function addEventListenerEditDueDate(editDueDate, taskIndex) {
     editDueDate.addEventListener('change', function() {
-        const formattedDate = format(this.value, "yyyy-MM-dd")
-        changeTaskProperty.editDueDate(taskIndex, this.value)
+        const formattedDate = format(this.value, 'yyyy-MM-dd');
+        changeTaskProperty.editDueDate(taskIndex, formattedDate);
+        displayTasks.editDueDateElement(taskIndex)
     });
 }
 
@@ -84,14 +85,14 @@ function addEventListenerAddTaskInput() {
         if (event.key === 'Enter') {
             if (addTaskInput.value !== '') {
                 const projectName = document.getElementById('projectName');
-                const formattedCurrentDate = format(new Date(), 'yyyy-MM-dd');
+                const date = new Date()
                 const inputValue = event.target.value;
                 if (projectName.innerHTML == 'All') {
-                    new Task(inputValue, 'description', formattedCurrentDate, false, false, '');
+                    new Task(inputValue, 'description', date, false, false, '');
                     displayTasks.displayAllTasksTab();
                 }
                 else {
-                    new Task(inputValue, 'description', formattedCurrentDate, false, false, projectName.innerHTML);
+                    new Task(inputValue, 'description', date, false, false, projectName.innerHTML);
                 }
                 event.target.value = ''; // Clear the input field after submitting
             }

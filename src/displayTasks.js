@@ -1,9 +1,8 @@
 import { getTasksFromStorage } from "./getTasksFromStorage";
 import * as addEventListeners from "./addEventListeners";
-import { add, format } from "date-fns";
 import * as changeTaskProperty from "./changeTaskProperty";
 import importantIconSrc from './icons/exclamation-mark-svgrepo-com.svg';
-
+import { format } from 'date-fns';
 
 function clearDom() {
     const tasksContainer = document.getElementById('currentTasks');
@@ -53,7 +52,7 @@ function displayImportantTab() {
 }
 
 function displayDueTodayTab() {
-    const today = format(new Date(), "yyyy-MM-dd");
+    const today = new Date();
     const allTasks = getTasksFromStorage();
     clearDom();
 
@@ -111,7 +110,16 @@ function toggleImportantIcon(taskIndex) {
     }
 }
 
+function editDueDateElement(taskIndex) {
+    const tasks = getTasksFromStorage();
+    const task = tasks[taskIndex];
+    const taskCard = document.querySelector(`[data-index='${taskIndex}']`); // Find the corresponding task card in the DOM.
+    const currentDueDateElement= taskCard.querySelector('.dueDate');
+    const newDueDate = task.dueDate;
+    currentDueDateElement.innerHTML = newDueDate;
+}
 
+/** 
 function replaceWithText(input) {
     const taskCard = input.closest('.taskCard');
     const dataIndex = taskCard.getAttribute('data-index');
@@ -126,11 +134,13 @@ function replaceWithText(input) {
     });
     input.parentNode.replaceChild(title, input);
 }
+**/
 
 const openEditPanel = (taskIndex, event) => {
     const tasks = getTasksFromStorage();
     const taskInStorage = tasks[taskIndex];
-    const formattedDueDate = format(new Date(taskInStorage.dueDate), 'yyyy-MM-dd');
+    const date = new Date(taskInStorage.dueDate);
+    const formattedDate = format(date, 'yyyy-MM-dd');
     const editDueDate = document.getElementById('editDueDate');
     const editImportance = document.getElementById('editImportance');
     const taskToEdit = document.getElementById('taskToEdit');
@@ -141,7 +151,7 @@ const openEditPanel = (taskIndex, event) => {
 
 
 
-    editDueDate.value = formattedDueDate;
+    editDueDate.value = formattedDate;
     document.getElementById('taskEditPanel').classList.add('open');
     event.stopPropagation(); // Prevent the click from reaching the document listener
 };
@@ -182,17 +192,18 @@ function createNewTaskCard(obj) {
     // Create dueDate
     const dueDate = document.createElement('p');
     dueDate.classList.add('dueDate');
-    dueDate.innerHTML = obj.dueDate;
+    dueDate.innerHTML = format(obj.dueDate, 'yyyy-MM-dd');
     taskCard.appendChild(dueDate);
 
+    /**
     // Create date picker for when dueDate clicked
-    const today = new Date().toISOString().slice(0, 10); // Converts today's date to YYYY-MM-DD format
+    const today = new Date();
     const datePicker = document.createElement('input');
     datePicker.type = 'date';
     datePicker.classList.add('datePicker');
     datePicker.value = today;
     datePicker.style.display = 'none';
-    taskCard.appendChild(datePicker);
+    taskCard.appendChild(datePicker); **/
 
     // Create the important signifier
     if (obj.important) {
@@ -206,4 +217,4 @@ function createNewTaskCard(obj) {
     tasksContainer.appendChild(taskCard);
 }
 
-export { displayAllTasksTab, displayImportantTab, displayDueTodayTab, displayTasksFromProject, editTaskTitle, openEditPanel, toggleImportantIcon }
+export { displayAllTasksTab, displayImportantTab, displayDueTodayTab, displayTasksFromProject, editTaskTitle, openEditPanel, toggleImportantIcon, editDueDateElement }
