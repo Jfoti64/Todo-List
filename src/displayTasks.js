@@ -2,11 +2,22 @@ import { getTasksFromStorage } from "./getTasksFromStorage";
 import * as addEventListeners from "./addEventListeners";
 import * as changeTaskProperty from "./changeTaskProperty";
 import importantIconSrc from './icons/exclamation-mark-svgrepo-com.svg';
-import { format, parseISO, addHours } from 'date-fns';
+import { format, parseISO, isSameDay, parseJSON } from 'date-fns';
+import * as currentProject from "./currentProject";
 
 function clearDom() {
     const tasksContainer = document.getElementById('currentTasks');
     tasksContainer.innerHTML = '';
+}
+
+// Function to render tasks based on the project
+function renderTasksForProject(projectName) {
+    // Get tasks for the specified project from storage
+    const tasks = currentProject.getTasksForProject(projectName);
+    // Clear and update the DOM with these tasks
+    clearDom();
+    tasks.forEach(task => createNewTaskCard(task));
+    createAddTaskInput();
 }
 
 function createAddTaskInput() {
@@ -30,7 +41,9 @@ function createProjectName(currentProject) {
     tasksContainer.appendChild(projectName);
 }
 
+/**
 function displayAllTasksTab() {
+    
     const allTasks = getTasksFromStorage();
     clearDom();
     createProjectName('All');
@@ -39,8 +52,11 @@ function displayAllTasksTab() {
         createNewTaskCard(obj);
     });
     createAddTaskInput();
-}
 
+}
+**/
+
+/** 
 function displayImportantTab() {
     const allTasks = getTasksFromStorage();
     clearDom();
@@ -50,19 +66,24 @@ function displayImportantTab() {
         }
     });
 }
+**/
 
+/**
 function displayDueTodayTab() {
     const today = format(new Date(), 'yyyy-MM-dd');
     const allTasks = getTasksFromStorage();
     clearDom();
 
     allTasks.forEach(obj => {
-        if (obj.dueDate == today) {
+        const objDate = new Date(obj.date);
+        if (objDate, today) {
             createNewTaskCard(obj);
         }
     });
 }
+**/
 
+/** 
 function displayTasksFromProject(project) {
     const allTasks = getTasksFromStorage();
     clearDom();
@@ -74,6 +95,7 @@ function displayTasksFromProject(project) {
     });
     createAddTaskInput();
 }
+**/
 
 function editTaskTitle(taskTitle) {
     const input = document.createElement('input');
@@ -91,7 +113,9 @@ function editTaskTitle(taskTitle) {
     });
 }
 
+/** 
 function toggleImportantIcon(taskIndex) {
+    console.log('test');
     const tasks = getTasksFromStorage();
     const task = tasks[taskIndex];
     const taskCard = document.querySelector(`[data-index='${taskIndex}']`); // Find the corresponding task card in the DOM.
@@ -108,16 +132,23 @@ function toggleImportantIcon(taskIndex) {
     } else if (existingIcon){
             existingIcon.remove();
     }
+    console.log('test');
+    renderTasksForProject(currentProject.getAppState().currentProject);
 }
+**/
 
 function editDueDateElement(taskIndex) {
-    const tasks = getTasksFromStorage();
-    const task = tasks[taskIndex];
     const taskCard = document.querySelector(`[data-index='${taskIndex}']`); // Find the corresponding task card in the DOM.
-    const currentDueDateElement = taskCard.querySelector('.dueDate');
-    const date = parseISO(task.dueDate);
-    const formattedDate = format(date, 'yyyy-MM-dd');
-    currentDueDateElement.innerHTML = formattedDate;
+    if (taskCard) {
+        const tasks = getTasksFromStorage();
+        const task = tasks[taskIndex];
+        const currentDueDateElement = taskCard.querySelector('.dueDate');
+        const date = parseISO(task.dueDate);
+        const formattedDate = format(date, 'yyyy-MM-dd');
+        currentDueDateElement.innerHTML = formattedDate;
+    } 
+   
+    renderTasksForProject(currentProject.getAppState().currentProject);
 }
 
 function replaceWithText(input) {
@@ -216,4 +247,4 @@ function createNewTaskCard(obj) {
     tasksContainer.appendChild(taskCard);
 }
 
-export { displayAllTasksTab, displayImportantTab, displayDueTodayTab, displayTasksFromProject, editTaskTitle, openEditPanel, toggleImportantIcon, editDueDateElement }
+export { editTaskTitle, openEditPanel, editDueDateElement, renderTasksForProject }

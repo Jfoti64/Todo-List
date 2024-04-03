@@ -3,6 +3,7 @@ import { Task } from './tasks';
 import * as displayTasks from "./displayTasks";
 import { getTasksFromStorage } from "./getTasksFromStorage";
 import { format, addHours } from 'date-fns';
+import * as currentProject from "./currentProject";
 
 function addEventListenerTaskCard(taskCard) {
     taskCard.addEventListener('click', (event) => {
@@ -17,13 +18,11 @@ function addEventListenerImportantToggle(toggleImportant, taskIndex) {
         toggleImportant.removeEventListener('click', toggleImportant._importantClickListener);
     }
 
-    // Create a new listener
     toggleImportant._importantClickListener = () => {
         changeTaskProperty.toggleImportant(taskIndex);
-        displayTasks.toggleImportantIcon(taskIndex);
+        displayTasks.renderTasksForProject(currentProject.getAppState().currentProject);
     };
 
-    // Add the new listener
     toggleImportant.addEventListener('click', toggleImportant._importantClickListener);
 }
 
@@ -59,7 +58,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const allTasksTabBtn = document.getElementById('allTab');
 
     allTasksTabBtn.addEventListener('click', () => {
-        displayTasks.displayAllTasksTab();
+        displayTasks.renderTasksForProject('All');
+        currentProject.setCurrentProject('All');
     });
 })();
 
@@ -67,7 +67,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const todayTabBtn = document.getElementById('todayTab');
 
     todayTabBtn.addEventListener('click', () => {
-            displayTasks.displayDueTodayTab();
+            displayTasks.renderTasksForProject('today');
+            currentProject.setCurrentProject('today');
     });
 })();
 
@@ -75,12 +76,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const importantTabBtn = document.getElementById('importantTab');
 
     importantTabBtn.addEventListener('click', () => {
-        displayTasks.displayImportantTab();
+        displayTasks.renderTasksForProject('important');
+        currentProject.setCurrentProject('important');
     })
 })();
 
 function addEventListenerAddTaskInput() {
     const addTaskInput = document.getElementById('addTaskInput');
+    const appState = currentProject.getAppState();
 
     addTaskInput.addEventListener('keypress', event => {
         if (event.key === 'Enter') {
@@ -89,12 +92,17 @@ function addEventListenerAddTaskInput() {
                 const currentDate = new Date().toISOString();
                 const currentDateAtNoon = addHours(currentDate, 12);
                 const inputValue = event.target.value;
-                if (projectName.innerHTML == 'All') {
+                if (appState == 'All') {
                     new Task(inputValue, 'description', currentDateAtNoon, false, false, '');
-                    displayTasks.displayAllTasksTab();
+                    displayTasks.renderTasksForProject('All');
                 }
-                else {
-                    new Task(inputValue, 'description', currentDateAtNoon, false, false, projectName.innerHTML);
+                else if (appState == 'today'){
+                    new Task(inputValue, 'description', currentDateAtNoon, false, false, '');
+                    displayTasks.renderTasksForProject('today');
+                }
+                else if (appState == 'important'){
+                    new Task(inputValue, 'description', currentDateAtNoon, false, false, '');
+                    displayTasks.renderTasksForProject('important');
                 }
                 event.target.value = ''; // Clear the input field after submitting
             }
@@ -107,29 +115,5 @@ function addEventListenerTaskTitle(taskTitle) {
         displayTasks.editTaskTitle(taskTitle);
     })
 }
-
-// When dueDate p is clicked
-/**function addEventListenerDueDate(dueDate) {
-    dueDate.addEventListener('click', (e) => {
-        const datePicker = taskCard.querySelector('.datePicker');
-
-        // Setup the event listener for when a new date is selected
-        datePicker.addEventListener('change', function() {
-            // Update the dueDate element with the new date
-            dueDate.textContent = this.value;
-        });
-    });
-} 
-
-function addEventListenerImportantIcon(icon) {
-    icon.addEventListener('click', () => {
-        const taskCard = icon.closest('.taskCard');
-        const index = taskCard.getAttribute('data-index');
-        changeTaskProperty.toggleImportant(index);
-    });
-} 
-**/
-
-
 
 export { addEventListenerCompletionStatus, addEventListenerAddTaskInput, addEventListenerTaskTitle, addEventListenerTaskCard, addEventListenerImportantToggle, addEventListenerEditDueDate }

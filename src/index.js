@@ -12,6 +12,6 @@ import { Task } from "./tasks";
 //let formattedDate = format(new Date(2014, 1, 11), "MM/dd/yyyy");
 //let testing = new Task('title1', 'description1', formattedDate, true, true, 'project1');
 
-displayTasks.displayAllTasksTab();
+displayTasks.renderTasksForProject('All');
 
 // Log first object's title in tasks array from local storage
