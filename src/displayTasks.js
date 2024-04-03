@@ -52,7 +52,7 @@ function displayImportantTab() {
 }
 
 function displayDueTodayTab() {
-    const today = new Date();
+    const today = format(new Date(), 'yyyy-MM-dd');
     const allTasks = getTasksFromStorage();
     clearDom();
 

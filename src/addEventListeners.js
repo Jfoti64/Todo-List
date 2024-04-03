@@ -85,14 +85,14 @@ function addEventListenerAddTaskInput() {
         if (event.key === 'Enter') {
             if (addTaskInput.value !== '') {
                 const projectName = document.getElementById('projectName');
-                const date = new Date()
+                const CurrentDate = format(new Date(), 'yyyy-MM-dd');
                 const inputValue = event.target.value;
                 if (projectName.innerHTML == 'All') {
-                    new Task(inputValue, 'description', date, false, false, '');
+                    new Task(inputValue, 'description', CurrentDate, false, false, '');
                     displayTasks.displayAllTasksTab();
                 }
                 else {
-                    new Task(inputValue, 'description', date, false, false, projectName.innerHTML);
+                    new Task(inputValue, 'description', CurrentDate, false, false, projectName.innerHTML);
                 }
                 event.target.value = ''; // Clear the input field after submitting
             }
