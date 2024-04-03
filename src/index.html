@@ -7,20 +7,25 @@
 </head>
 <body>
     <header>
-        <img id="hamburgerMenu" />
+        <img id="hamburgerMenu"/>
         <h1>Todo List</h1>
     </header>
     <div id="centerContent">
         <div id="leftColumn">
-            <button id="allTab">All</button>
-            <button id="todayTab">Today</button>
-            <button id="importantTab">Important</button>
-            <h2>Projects</h2>
-            <div id="addProject">+ Add Project</div>
+            
         </div>
         <div id="currentTasks">
             <div id="addTask">+ Add Task</div>
         </div>
+    </div>
+    <!-- Slide-in panel for projects -->
+    <div id="projectsPanel" class="projects-panel">
+        <!-- Projects content -->
+        <button id="allTab">All</button>
+        <button id="todayTab">Today</button>
+        <button id="importantTab">Important</button>
+        <h2>Projects</h2>
+        <div id="addProject">+ Add Project</div>
     </div>
     <!-- Slide-in panel for task editing -->
     <div id="taskEditPanel" class="task-edit-panel">

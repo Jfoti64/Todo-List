@@ -27,6 +27,11 @@ function renderTasksForProject(projectName) {
     createAddTaskInput();
 }
 
+function openProjectsPanel() {
+    const projectsPanel = document.getElementById('projectsPanel')
+    projectsPanel.classList.add('open');
+}
+
 function createAddTaskInput() {
     const addTaskInputDiv = document.createElement('div');
     addTaskInputDiv.id = 'addTaskDiv';
@@ -164,4 +169,4 @@ function createNewTaskCard(obj) {
     tasksContainer.appendChild(taskCard);
 }
 
-export { editTaskTitle, openEditPanel, editDueDateElement, renderTasksForProject }
+export { editTaskTitle, openEditPanel, editDueDateElement, renderTasksForProject, openProjectsPanel }

@@ -53,6 +53,14 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+document.addEventListener("DOMContentLoaded", function() {
+    (function addEventListenerProjectsBtn() {
+        const hamburgerMenu = document.getElementById('hamburgerMenu');
+        hamburgerMenu.addEventListener('click', () => {
+            displayTasks.openProjectsPanel();
+        });
+    })();
+});
 
 (function addEventListenerAllTasksBtn() {
     const allTasksTabBtn = document.getElementById('allTab');

@@ -115,3 +115,19 @@ footer {
     right: 0;
 }
 
+.projects-panel {
+    position: fixed;
+    top: 0;
+    left: -100%; /* Start off-screen */
+    width: 300px; /* Or any desired width */
+    height: 100%;
+    background-color: white;
+    box-shadow: -2px 0 5px rgba(0,0,0,0.5);
+    transition: left 0.5s; /* Corrected transition property */
+    padding: 20px;
+}
+
+.projects-panel.open {
+    left: 0;
+}
+
