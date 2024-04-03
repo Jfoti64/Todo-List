@@ -41,62 +41,6 @@ function createProjectName(currentProject) {
     tasksContainer.appendChild(projectName);
 }
 
-/**
-function displayAllTasksTab() {
-    
-    const allTasks = getTasksFromStorage();
-    clearDom();
-    createProjectName('All');
-
-    allTasks.forEach(obj => {
-        createNewTaskCard(obj);
-    });
-    createAddTaskInput();
-
-}
-**/
-
-/** 
-function displayImportantTab() {
-    const allTasks = getTasksFromStorage();
-    clearDom();
-    allTasks.forEach(obj => {
-        if (obj.important == true) {
-            createNewTaskCard(obj);
-        }
-    });
-}
-**/
-
-/**
-function displayDueTodayTab() {
-    const today = format(new Date(), 'yyyy-MM-dd');
-    const allTasks = getTasksFromStorage();
-    clearDom();
-
-    allTasks.forEach(obj => {
-        const objDate = new Date(obj.date);
-        if (objDate, today) {
-            createNewTaskCard(obj);
-        }
-    });
-}
-**/
-
-/** 
-function displayTasksFromProject(project) {
-    const allTasks = getTasksFromStorage();
-    clearDom();
-
-    allTasks.forEach(obj => {
-        if (obj.project == project) {
-            createNewTaskCard(obj);
-        }
-    });
-    createAddTaskInput();
-}
-**/
-
 function editTaskTitle(taskTitle) {
     const input = document.createElement('input');
     input.type = 'text';
@@ -112,30 +56,6 @@ function editTaskTitle(taskTitle) {
         replaceWithText(this);
     });
 }
-
-/** 
-function toggleImportantIcon(taskIndex) {
-    console.log('test');
-    const tasks = getTasksFromStorage();
-    const task = tasks[taskIndex];
-    const taskCard = document.querySelector(`[data-index='${taskIndex}']`); // Find the corresponding task card in the DOM.
-
-    // Attempt to find an existing important icon within the task card.
-    const existingIcon = taskCard.querySelector('.importantIcon');
-
-    if (task.important) {
-        const importantIcon = document.createElement('img');
-        importantIcon.classList.add('importantIcon');
-        importantIcon.src = importantIconSrc;
-        importantIcon.alt = 'Important Task';
-        taskCard.appendChild(importantIcon);
-    } else if (existingIcon){
-            existingIcon.remove();
-    }
-    console.log('test');
-    renderTasksForProject(currentProject.getAppState().currentProject);
-}
-**/
 
 function editDueDateElement(taskIndex) {
     const taskCard = document.querySelector(`[data-index='${taskIndex}']`); // Find the corresponding task card in the DOM.
@@ -224,16 +144,6 @@ function createNewTaskCard(obj) {
     dueDate.classList.add('dueDate');
     dueDate.innerHTML = format(obj.dueDate, 'yyyy-MM-dd');
     taskCard.appendChild(dueDate);
-
-    /**
-    // Create date picker for when dueDate clicked
-    const today = new Date();
-    const datePicker = document.createElement('input');
-    datePicker.type = 'date';
-    datePicker.classList.add('datePicker');
-    datePicker.value = today;
-    datePicker.style.display = 'none';
-    taskCard.appendChild(datePicker); **/
 
     // Create the important signifier
     if (obj.important) {
