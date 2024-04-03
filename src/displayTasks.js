@@ -16,6 +16,7 @@ function renderTasksForProject(projectName) {
     const tasks = currentProject.getTasksForProject(projectName);
     // Clear and update the DOM with these tasks
     clearDom();
+    createProjectName();
     tasks.forEach(task => createNewTaskCard(task));
     createAddTaskInput();
 }
@@ -33,11 +34,11 @@ function createAddTaskInput() {
     addEventListeners.addEventListenerAddTaskInput();
 }
 
-function createProjectName(currentProject) {
+function createProjectName() {
     const tasksContainer = document.getElementById('currentTasks');
     const projectName = document.createElement('h2');
+    projectName.innerHTML = currentProject.getAppState().currentProject;
     projectName.id = 'projectName';
-    projectName.innerHTML = currentProject;
     tasksContainer.appendChild(projectName);
 }
 
