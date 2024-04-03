@@ -2,7 +2,7 @@ import * as changeTaskProperty from "./changeTaskProperty";
 import { Task } from './tasks';
 import * as displayTasks from "./displayTasks";
 import { getTasksFromStorage } from "./getTasksFromStorage";
-import { format, addHours } from 'date-fns';
+import { format, addHours, startOfToday } from 'date-fns';
 import * as currentProject from "./currentProject";
 
 function addEventListenerTaskCard(taskCard) {
@@ -83,13 +83,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function addEventListenerAddTaskInput() {
     const addTaskInput = document.getElementById('addTaskInput');
-    const appState = currentProject.getAppState();
+    const appState = currentProject.getAppState().currentProject;
 
     addTaskInput.addEventListener('keypress', event => {
         if (event.key === 'Enter') {
             if (addTaskInput.value !== '') {
-                const projectName = document.getElementById('projectName');
-                const currentDate = new Date().toISOString();
+                const currentDate = startOfToday();
                 const currentDateAtNoon = addHours(currentDate, 12);
                 const inputValue = event.target.value;
                 if (appState == 'All') {
@@ -101,7 +100,7 @@ function addEventListenerAddTaskInput() {
                     displayTasks.renderTasksForProject('today');
                 }
                 else if (appState == 'important'){
-                    new Task(inputValue, 'description', currentDateAtNoon, false, false, '');
+                    new Task(inputValue, 'description', currentDateAtNoon, false, true, '');
                     displayTasks.renderTasksForProject('important');
                 }
                 event.target.value = ''; // Clear the input field after submitting
