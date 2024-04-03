@@ -29,8 +29,8 @@ function addEventListenerImportantToggle(toggleImportant, taskIndex) {
 
 function addEventListenerEditDueDate(editDueDate, taskIndex) {
     editDueDate.addEventListener('change', function() {
-        const formattedDate = format(this.value, 'yyyy-MM-dd');
-        changeTaskProperty.editDueDate(taskIndex, formattedDate);
+        const date = new Date(this.value).toISOString();
+        changeTaskProperty.editDueDate(taskIndex, date);
         displayTasks.editDueDateElement(taskIndex)
     });
 }
@@ -85,7 +85,7 @@ function addEventListenerAddTaskInput() {
         if (event.key === 'Enter') {
             if (addTaskInput.value !== '') {
                 const projectName = document.getElementById('projectName');
-                const CurrentDate = format(new Date(), 'yyyy-MM-dd');
+                const CurrentDate = new Date().toISOString();
                 const inputValue = event.target.value;
                 if (projectName.innerHTML == 'All') {
                     new Task(inputValue, 'description', CurrentDate, false, false, '');

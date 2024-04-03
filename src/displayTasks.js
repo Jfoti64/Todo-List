@@ -2,7 +2,7 @@ import { getTasksFromStorage } from "./getTasksFromStorage";
 import * as addEventListeners from "./addEventListeners";
 import * as changeTaskProperty from "./changeTaskProperty";
 import importantIconSrc from './icons/exclamation-mark-svgrepo-com.svg';
-import { format } from 'date-fns';
+import { format, parseISO, addHours } from 'date-fns';
 
 function clearDom() {
     const tasksContainer = document.getElementById('currentTasks');
@@ -102,7 +102,7 @@ function toggleImportantIcon(taskIndex) {
     if (task.important) {
         const importantIcon = document.createElement('img');
         importantIcon.classList.add('importantIcon');
-        importantIcon.src = importantIconSrc; 
+        importantIcon.src = importantIconSrc;
         importantIcon.alt = 'Important Task';
         taskCard.appendChild(importantIcon);
     } else if (existingIcon){
@@ -114,12 +114,13 @@ function editDueDateElement(taskIndex) {
     const tasks = getTasksFromStorage();
     const task = tasks[taskIndex];
     const taskCard = document.querySelector(`[data-index='${taskIndex}']`); // Find the corresponding task card in the DOM.
-    const currentDueDateElement= taskCard.querySelector('.dueDate');
-    const newDueDate = task.dueDate;
-    currentDueDateElement.innerHTML = newDueDate;
+    const currentDueDateElement = taskCard.querySelector('.dueDate');
+    const date = parseISO(task.dueDate);
+    const noonOnDate = addHours(date, 12);
+    const formattedDate = format(noonOnDate, 'yyyy-MM-dd');
+    currentDueDateElement.innerHTML = formattedDate;
 }
 
-/** 
 function replaceWithText(input) {
     const taskCard = input.closest('.taskCard');
     const dataIndex = taskCard.getAttribute('data-index');
@@ -134,7 +135,6 @@ function replaceWithText(input) {
     });
     input.parentNode.replaceChild(title, input);
 }
-**/
 
 const openEditPanel = (taskIndex, event) => {
     const tasks = getTasksFromStorage();
