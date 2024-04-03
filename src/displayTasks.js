@@ -4,6 +4,12 @@ import * as changeTaskProperty from "./changeTaskProperty";
 import importantIconSrc from './icons/exclamation-mark-svgrepo-com.svg';
 import { format, parseISO, isSameDay, parseJSON } from 'date-fns';
 import * as currentProject from "./currentProject";
+import hamburgerMenuIcon from './icons/hamburger-menu-svgrepo-com.svg';
+
+// Insert hamburger menu into html
+const hamburgerMenu = document.getElementById('hamburgerMenu');
+hamburgerMenu.src = hamburgerMenuIcon;
+hamburgerMenu.alt = 'hamburger menu';
 
 function clearDom() {
     const tasksContainer = document.getElementById('currentTasks');

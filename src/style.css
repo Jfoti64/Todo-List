@@ -36,6 +36,11 @@ header {
     background-color: blue;
 }
 
+#hamburgerMenu {
+    width: 60px;
+    height: 60px;
+}
+
 h3 {
     font-size: 3rem;
 }
@@ -71,6 +76,8 @@ h3 {
     width: 30px;
     height: 30px;
 }
+
+
 
 .importantIcon
 
