@@ -2,7 +2,7 @@ import * as changeTaskProperty from "./changeTaskProperty";
 import { Task } from './tasks';
 import * as displayTasks from "./displayTasks";
 import { getTasksFromStorage } from "./getTasksFromStorage";
-import { format } from 'date-fns';
+import { format, addHours } from 'date-fns';
 
 function addEventListenerTaskCard(taskCard) {
     taskCard.addEventListener('click', (event) => {
@@ -29,8 +29,9 @@ function addEventListenerImportantToggle(toggleImportant, taskIndex) {
 
 function addEventListenerEditDueDate(editDueDate, taskIndex) {
     editDueDate.addEventListener('change', function() {
-        const date = new Date(this.value).toISOString();
-        changeTaskProperty.editDueDate(taskIndex, date);
+        const date = new Date(this.value);
+        const constDateAtNoon = addHours(date, 12);
+        changeTaskProperty.editDueDate(taskIndex, constDateAtNoon);
         displayTasks.editDueDateElement(taskIndex)
     });
 }
@@ -85,14 +86,15 @@ function addEventListenerAddTaskInput() {
         if (event.key === 'Enter') {
             if (addTaskInput.value !== '') {
                 const projectName = document.getElementById('projectName');
-                const CurrentDate = new Date().toISOString();
+                const currentDate = new Date().toISOString();
+                const currentDateAtNoon = addHours(currentDate, 12);
                 const inputValue = event.target.value;
                 if (projectName.innerHTML == 'All') {
-                    new Task(inputValue, 'description', CurrentDate, false, false, '');
+                    new Task(inputValue, 'description', currentDateAtNoon, false, false, '');
                     displayTasks.displayAllTasksTab();
                 }
                 else {
-                    new Task(inputValue, 'description', CurrentDate, false, false, projectName.innerHTML);
+                    new Task(inputValue, 'description', currentDateAtNoon, false, false, projectName.innerHTML);
                 }
                 event.target.value = ''; // Clear the input field after submitting
             }

@@ -116,8 +116,7 @@ function editDueDateElement(taskIndex) {
     const taskCard = document.querySelector(`[data-index='${taskIndex}']`); // Find the corresponding task card in the DOM.
     const currentDueDateElement = taskCard.querySelector('.dueDate');
     const date = parseISO(task.dueDate);
-    const noonOnDate = addHours(date, 12);
-    const formattedDate = format(noonOnDate, 'yyyy-MM-dd');
+    const formattedDate = format(date, 'yyyy-MM-dd');
     currentDueDateElement.innerHTML = formattedDate;
 }
 

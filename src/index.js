@@ -14,13 +14,4 @@ import { Task } from "./tasks";
 
 displayTasks.displayAllTasksTab();
 
-
-let firstTry = getTasksFromStorage();
-
 // Log first object's title in tasks array from local storage
-console.log(firstTry[0].title);
-console.log(firstTry[0].description);
-console.log(firstTry[0].dueDate);
-console.log(firstTry[0].completionStatus);
-console.log(firstTry[0].important);
-console.log(firstTry[0].project);
