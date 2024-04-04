@@ -36,13 +36,23 @@ function addEventListenerImportantToggle(toggleImportant, taskIndex) {
 }
 
 function addEventListenerEditDueDate(editDueDate, taskIndex) {
-    editDueDate.addEventListener('change', function() {
+    // Remove any previously attached event listeners to avoid duplicates.
+    if (editDueDate._changeEventListener) {
+        editDueDate.removeEventListener('change', editDueDate._changeEventListener);
+    }
+
+    // Define a new event listener function with the current taskIndex context.
+    editDueDate._changeEventListener = function() {
         const date = new Date(this.value);
-        const constDateAtNoon = addHours(date, 12);
-        changeTaskProperty.editDueDate(taskIndex, constDateAtNoon);
-        displayTasks.editDueDateElement(taskIndex)
-    });
+        const dateAtNoon = addHours(date, 12);
+        changeTaskProperty.editDueDate(taskIndex, dateAtNoon);
+        displayTasks.editDueDateElement(taskIndex);
+    };
+
+    // Attach the new event listener to the editDueDate input.
+    editDueDate.addEventListener('change', editDueDate._changeEventListener);
 }
+
 
 function addEventListenerCompletionStatus(completionStatus) {
     completionStatus.addEventListener('click', () => {
