@@ -1,6 +1,6 @@
 import { getTasksFromStorage } from "./getTasksFromStorage";
 import { renderTasksForProject } from "./displayTasks";
-import { isSameDay, addHours } from 'date-fns';
+import { isSameDay } from 'date-fns';
 
 // Define a global object to keep track of the application state
 let appState = {

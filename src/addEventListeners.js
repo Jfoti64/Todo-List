@@ -1,10 +1,10 @@
 import * as changeTaskProperty from "./changeTaskProperty";
 import { Task } from './tasks';
 import * as displayTasks from "./displayTasks";
-import { getTasksFromStorage, getProjectsFromStorage } from "./getTasksFromStorage";
-import { format, addHours, startOfToday } from 'date-fns';
+import { getProjectsFromStorage } from "./getTasksFromStorage";
+import { addHours, startOfToday } from 'date-fns';
 import * as currentProject from "./currentProject";
-import { populateStorage, populateStorageProjects } from "./populateStorage";
+import { populateStorageProjects } from "./populateStorage";
 
 function addEventListenerTaskCard(taskCard) {
     taskCard.addEventListener('click', (event) => {

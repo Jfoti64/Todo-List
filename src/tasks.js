@@ -14,8 +14,6 @@ class Task {
         updateIndexes();
         populateStorage(this);
     }
-
-
 }
 
 export { Task };
