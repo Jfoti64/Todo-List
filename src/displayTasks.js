@@ -73,22 +73,6 @@ function createProjectName() {
     tasksContainer.appendChild(projectName);
 }
 
-function editTaskTitle(taskTitle) {
-    const input = document.createElement('input');
-    input.type = 'text';
-    input.value = taskTitle.innerText;
-    input.classList.add('task-title-input');
-
-    taskTitle.parentNode.replaceChild(input, taskTitle);
-
-    input.focus();
-
-    // When the input loses focus, replace it with the <p> element again
-    input.addEventListener('blur', function() {
-        replaceWithText(this);
-    });
-}
-
 function editDueDateElement(taskIndex) {
     const taskCard = document.querySelector(`[data-index='${taskIndex}']`); // Find the corresponding task card in the DOM.
     const appState = currentProject.getAppState().currentProject;
@@ -104,19 +88,21 @@ function editDueDateElement(taskIndex) {
     currentProject.renderTasksForProject(appState);
 }
 
-function replaceWithText(input) {
-    const taskCard = input.closest('.taskCard');
-    const dataIndex = taskCard.getAttribute('data-index');
-    const title = document.createElement('p');
-    title.innerText = input.value;
-    title.classList.add('title');
+function displayTitleEditor(event) {
+    const taskToEdit = document.getElementById('taskToEdit');
+    const currentTitle = taskToEdit.textContent;
 
-    changeTaskProperty.editTitle(dataIndex, input.value);
+    const titleEditor = document.createElement('input');
+    titleEditor.type = 'text';
+    titleEditor.value = currentTitle;
+    titleEditor.id = 'titleEditor';
 
-    title.addEventListener('click', function() {
-        editTaskTitle(this);
-    });
-    input.parentNode.replaceChild(title, input);
+    // Replace the task title display with the title editor input
+    taskToEdit.parentNode.replaceChild(titleEditor, taskToEdit);
+
+    // Focus on the input field to immediately allow editing
+    titleEditor.focus();
+    event.stopPropagation();
 }
 
 const openEditPanel = (taskIndex, event) => {
@@ -131,6 +117,7 @@ const openEditPanel = (taskIndex, event) => {
     editImportance.checked = taskInStorage.important;
     addEventListeners.addEventListenerImportantToggle(editImportance, taskIndex);
     addEventListeners.addEventListenerEditDueDate(editDueDate, taskIndex);
+    addEventListeners.addEventListenerPanelTaskTitle(taskIndex, taskToEdit);
 
     editDueDate.value = formattedDate;
     document.getElementById('taskEditPanel').classList.add('open');
@@ -180,8 +167,6 @@ function createNewTaskCard(obj) {
     title.innerHTML = obj.title;
     taskCard.appendChild(title);
 
-    addEventListeners.addEventListenerTaskTitle(title);
-
     // Create description
     const description = document.createElement('p');
     description.classList.add('description');
@@ -206,4 +191,4 @@ function createNewTaskCard(obj) {
     tasksContainer.appendChild(taskCard);
 }
 
-export { editTaskTitle, openEditPanel, editDueDateElement, renderTasksForProject, openProjectsPanel, closeProjectsPanel, closeEditPanel, renderProjects }
+export { openEditPanel, editDueDateElement, renderTasksForProject, openProjectsPanel, closeProjectsPanel, closeEditPanel, renderProjects, displayTitleEditor }

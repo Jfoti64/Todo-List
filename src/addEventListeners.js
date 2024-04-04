@@ -141,10 +141,30 @@ function addEventListenerAddTaskInput() {
     });  
 }
 
-function addEventListenerTaskTitle(taskTitle) {
-    taskTitle.addEventListener('click', () => {
-        displayTasks.editTaskTitle(taskTitle);
-    })
+function addEventListenerPanelTaskTitle(taskIndex, taskToEdit) {
+    taskToEdit.addEventListener('click', (event) => {
+        displayTasks.displayTitleEditor(event);
+        const titleEditor = document.getElementById('titleEditor');
+        // When focus is lost from the title editor, save the new title and switch back to the <h3>
+        titleEditor.addEventListener('blur', function() {
+            const updatedTitle = titleEditor.value;
+            
+            // Trigger saving the updated title to task storage
+            changeTaskProperty.editTitle(taskIndex, updatedTitle);
+
+            // Recreate the task title <h3>
+            const newTaskTitle = document.createElement('h3');
+            newTaskTitle.textContent = updatedTitle;
+            newTaskTitle.id = 'taskToEdit'; // Make sure to reassign the id or any needed class
+            
+            // Replace the title editor with the new task title <h3>
+            titleEditor.parentNode.replaceChild(newTaskTitle, titleEditor);
+
+            // Refresh current project
+            const currentProjectTab = currentProject.getAppState().currentProject;
+            currentProject.setCurrentProject(currentProjectTab);
+        });
+    });
 }
 
-export { addEventListenerCompletionStatus, addEventListenerAddTaskInput, addEventListenerTaskTitle, addEventListenerTaskCard, addEventListenerImportantToggle, addEventListenerEditDueDate, addEventListenerProjectCard }
+export { addEventListenerCompletionStatus, addEventListenerAddTaskInput, addEventListenerTaskCard, addEventListenerImportantToggle, addEventListenerEditDueDate, addEventListenerProjectCard, addEventListenerPanelTaskTitle }
