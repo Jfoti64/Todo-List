@@ -46,14 +46,8 @@ function addEventListenerCompletionStatus(completionStatus) {
 
 document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('click', function(event) {
-        const editPanel = document.getElementById('taskEditPanel');
-        const projectsPanel = document.getElementById('projectsPanel');
-        if (!editPanel.contains(event.target) && editPanel.classList.contains('open')) {
-            editPanel.classList.remove('open');
-        }
-        if (!projectsPanel.contains(event.target) && projectsPanel.classList.contains('open')) {
-            projectsPanel.classList.remove('open');
-        }
+        displayTasks.closeEditPanel(event);
+        displayTasks.closeProjectsPanel(event);
     });
 });
 
@@ -68,6 +62,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 (function addEventListenerAllTasksBtn() {
     const allTasksTabBtn = document.getElementById('allTab');
+    const projectsPanel = document.getElementById('projectsPanel');
 
     allTasksTabBtn.addEventListener('click', () => {
         displayTasks.renderTasksForProject('All');

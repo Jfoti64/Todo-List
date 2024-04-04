@@ -33,6 +33,13 @@ function openProjectsPanel(event) {
     event.stopPropagation(); // Prevent the click from reaching the document listener
 }
 
+function closeProjectsPanel(event) {
+    const projectsPanel = document.getElementById('projectsPanel');
+    if (!projectsPanel.contains(event.target) && projectsPanel.classList.contains('open')) {
+        projectsPanel.classList.remove('open');
+    }
+}
+
 function createAddTaskInput() {
     const addTaskInputDiv = document.createElement('div');
     addTaskInputDiv.id = 'addTaskDiv';
@@ -112,12 +119,18 @@ const openEditPanel = (taskIndex, event) => {
     addEventListeners.addEventListenerImportantToggle(editImportance, taskIndex);
     addEventListeners.addEventListenerEditDueDate(editDueDate, taskIndex);
 
-
-
     editDueDate.value = formattedDate;
     document.getElementById('taskEditPanel').classList.add('open');
     event.stopPropagation(); // Prevent the click from reaching the document listener
 };
+
+function closeEditPanel(event) {
+    const editPanel = document.getElementById('taskEditPanel');
+        
+    if (!editPanel.contains(event.target) && editPanel.classList.contains('open')) {
+        editPanel.classList.remove('open');
+    };
+}
 
 function createNewTaskCard(obj) {
     const tasksContainer = document.getElementById('currentTasks');
@@ -170,4 +183,4 @@ function createNewTaskCard(obj) {
     tasksContainer.appendChild(taskCard);
 }
 
-export { editTaskTitle, openEditPanel, editDueDateElement, renderTasksForProject, openProjectsPanel }
+export { editTaskTitle, openEditPanel, editDueDateElement, renderTasksForProject, openProjectsPanel, closeProjectsPanel, closeEditPanel }
