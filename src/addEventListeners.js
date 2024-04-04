@@ -1,9 +1,10 @@
 import * as changeTaskProperty from "./changeTaskProperty";
 import { Task } from './tasks';
 import * as displayTasks from "./displayTasks";
-import { getTasksFromStorage } from "./getTasksFromStorage";
+import { getTasksFromStorage, getProjectsFromStorage } from "./getTasksFromStorage";
 import { format, addHours, startOfToday } from 'date-fns';
 import * as currentProject from "./currentProject";
+import { populateStorage, populateStorageProjects } from "./populateStorage";
 
 function addEventListenerTaskCard(taskCard) {
     taskCard.addEventListener('click', (event) => {
@@ -85,6 +86,20 @@ document.addEventListener("DOMContentLoaded", function() {
     importantTabBtn.addEventListener('click', () => {
         displayTasks.renderTasksForProject('important');
         currentProject.setCurrentProject('important');
+    })
+})();
+
+(function addEventListenerAddProjectInput() {
+    const addProjectInput = document.getElementById('addProjectInput');
+    const projects = getProjectsFromStorage();
+
+    addProjectInput.addEventListener('keypress', event => {
+        const inputValue = addProjectInput.value;
+        if (event.key ==='Enter' && inputValue != '') {
+            if (!projects.includes(inputValue)) {
+                populateStorageProjects(inputValue);
+            }
+        }
     })
 })();
 
