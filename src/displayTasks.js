@@ -87,23 +87,6 @@ function editDueDateElement(taskIndex) {
     currentProject.renderTasksForProject(appState);
 }
 
-function displayTitleEditor(event) {
-    const taskToEdit = document.getElementById('taskToEdit');
-    const currentTitle = taskToEdit.textContent;
-
-    const titleEditor = document.createElement('input');
-    titleEditor.type = 'text';
-    titleEditor.value = currentTitle;
-    titleEditor.id = 'titleEditor';
-
-    // Replace the task title display with the title editor input
-    taskToEdit.parentNode.replaceChild(titleEditor, taskToEdit);
-
-    // Focus on the input field to immediately allow editing
-    titleEditor.focus();
-    event.stopPropagation();
-}
-
 const openEditPanel = (taskIndex, event) => {
     const tasks = getTasksFromStorage();
     const taskInStorage = tasks[taskIndex];
@@ -112,7 +95,7 @@ const openEditPanel = (taskIndex, event) => {
     const editDueDate = document.getElementById('editDueDate');
     const editImportance = document.getElementById('editImportance');
     const taskToEdit = document.getElementById('taskToEdit');
-    taskToEdit.innerHTML = taskInStorage.title;
+    taskToEdit.value = taskInStorage.title || ''; // Set to current task title
     editImportance.checked = taskInStorage.important;
     addEventListeners.addEventListenerImportantToggle(editImportance, taskIndex);
     addEventListeners.addEventListenerEditDueDate(editDueDate, taskIndex);
@@ -190,4 +173,4 @@ function createNewTaskCard(obj) {
     tasksContainer.appendChild(taskCard);
 }
 
-export { openEditPanel, editDueDateElement, renderTasksForProject, openProjectsPanel, closeProjectsPanel, closeEditPanel, renderProjects, displayTitleEditor }
+export { openEditPanel, editDueDateElement, renderTasksForProject, openProjectsPanel, closeProjectsPanel, closeEditPanel, renderProjects }

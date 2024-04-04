@@ -141,28 +141,11 @@ function addEventListenerAddTaskInput() {
     });  
 }
 
-// Define the click event handler as a named function
-function handleTaskTitleClick(event, taskIndex) {
-    displayTasks.displayTitleEditor(event);
-    const titleEditor = document.getElementById('titleEditor');
-    // Ensure there's only one blur event listener attached to the titleEditor
-    titleEditor.onblur = null; // Remove previous listener to prevent duplicates
-    titleEditor.onblur = () => handleTitleEditorBlur(taskIndex, titleEditor);
-}
-
 // Define the blur event handler as a named function
-function handleTitleEditorBlur(taskIndex, titleEditor) {
-    const updatedTitle = titleEditor.value;
+function handleTitleEditorBlur(taskIndex, inputElement) {
+    const updatedTitle = inputElement.value;
     // Trigger saving the updated title to task storage
     changeTaskProperty.editTitle(taskIndex, updatedTitle);
-    // Recreate the task title <h3>
-    const newTaskTitle = document.createElement('h3');
-    newTaskTitle.textContent = updatedTitle;
-    newTaskTitle.id = 'taskToEdit'; // Make sure to reassign the id or any needed class
-    // Replace the title editor with the new task title <h3>
-    titleEditor.parentNode.replaceChild(newTaskTitle, titleEditor);
-    // Reattach the event listener to the new title element for further edits
-    newTaskTitle.addEventListener('click', (event) => handleTaskTitleClick(event, taskIndex));
     // Refresh current project
     const currentProjectTab = currentProject.getAppState().currentProject;
     currentProject.setCurrentProject(currentProjectTab);
@@ -171,10 +154,8 @@ function handleTitleEditorBlur(taskIndex, titleEditor) {
 // The function to add the event listener to the task title element
 function addEventListenerPanelTaskTitle(taskIndex, taskToEdit) {
     // Remove any existing click event listener to prevent duplicates
-    taskToEdit.removeEventListener('click', taskToEdit.clickEventListener);
-    // Attach the new event listener
-    taskToEdit.clickEventListener = (event) => handleTaskTitleClick(event, taskIndex);
-    taskToEdit.addEventListener('click', taskToEdit.clickEventListener);
+    taskToEdit.onblur = null;
+    taskToEdit.onblur = () => handleTitleEditorBlur(taskIndex, taskToEdit);
 }
 
 
