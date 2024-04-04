@@ -27,9 +27,10 @@ function renderTasksForProject(projectName) {
     createAddTaskInput();
 }
 
-function openProjectsPanel() {
+function openProjectsPanel(event) {
     const projectsPanel = document.getElementById('projectsPanel')
     projectsPanel.classList.add('open');
+    event.stopPropagation(); // Prevent the click from reaching the document listener
 }
 
 function createAddTaskInput() {

@@ -47,8 +47,12 @@ function addEventListenerCompletionStatus(completionStatus) {
 document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('click', function(event) {
         const editPanel = document.getElementById('taskEditPanel');
+        const projectsPanel = document.getElementById('projectsPanel');
         if (!editPanel.contains(event.target) && editPanel.classList.contains('open')) {
             editPanel.classList.remove('open');
+        }
+        if (!projectsPanel.contains(event.target) && projectsPanel.classList.contains('open')) {
+            projectsPanel.classList.remove('open');
         }
     });
 });
@@ -56,8 +60,8 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener("DOMContentLoaded", function() {
     (function addEventListenerProjectsBtn() {
         const hamburgerMenu = document.getElementById('hamburgerMenu');
-        hamburgerMenu.addEventListener('click', () => {
-            displayTasks.openProjectsPanel();
+        hamburgerMenu.addEventListener('click', (event) => {
+            displayTasks.openProjectsPanel(event);
         });
     })();
 });
