@@ -111,10 +111,9 @@ document.addEventListener("DOMContentLoaded", function() {
 })();
 
 function addEventListenerAddTaskInput() {
-    const addTaskInput = document.getElementById('addTaskInput');
-    const appState = currentProject.getAppState().currentProject;
-
     addTaskInput.addEventListener('keypress', event => {
+        const addTaskInput = document.getElementById('addTaskInput');
+        const appState = currentProject.getAppState().currentProject;
         if (event.key === 'Enter') {
             if (addTaskInput.value !== '') {
                 const currentDate = startOfToday();
@@ -122,15 +121,19 @@ function addEventListenerAddTaskInput() {
                 const inputValue = event.target.value;
                 if (appState == 'All') {
                     new Task(inputValue, 'description', currentDateAtNoon, false, false, '');
-                    displayTasks.renderTasksForProject('All');
+                    currentProject.renderTasksForProject(appState);
                 }
                 else if (appState == 'today'){
                     new Task(inputValue, 'description', currentDateAtNoon, false, false, '');
-                    displayTasks.renderTasksForProject('today');
+                    currentProject.renderTasksForProject(appState);
                 }
                 else if (appState == 'important'){
                     new Task(inputValue, 'description', currentDateAtNoon, false, true, '');
-                    displayTasks.renderTasksForProject('important');
+                    currentProject.renderTasksForProject(appState);
+                }
+                else {
+                    new Task(inputValue, 'description', currentDateAtNoon, false, false, appState);
+                    currentProject.renderTasksForProject(appState);
                 }
                 event.target.value = ''; // Clear the input field after submitting
             }

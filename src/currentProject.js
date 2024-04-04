@@ -33,7 +33,7 @@ function getTasksForProject(projectName) {
         return tasksInProject;
     }
     else {
-        const tasksInProject = tasks.filter(task => task.projectName === projectName);
+        const tasksInProject = tasks.filter(task => task.project == projectName);
         return tasksInProject;
     }
 }

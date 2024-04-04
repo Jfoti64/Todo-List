@@ -91,6 +91,7 @@ function editTaskTitle(taskTitle) {
 
 function editDueDateElement(taskIndex) {
     const taskCard = document.querySelector(`[data-index='${taskIndex}']`); // Find the corresponding task card in the DOM.
+    const appState = currentProject.getAppState().currentProject;
     if (taskCard) {
         const tasks = getTasksFromStorage();
         const task = tasks[taskIndex];
@@ -100,7 +101,7 @@ function editDueDateElement(taskIndex) {
         currentDueDateElement.innerHTML = formattedDate;
     } 
    
-    renderTasksForProject(currentProject.getAppState().currentProject);
+    currentProject.renderTasksForProject(appState);
 }
 
 function replaceWithText(input) {
