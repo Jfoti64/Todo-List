@@ -13,6 +13,12 @@ function addEventListenerTaskCard(taskCard) {
     });
 }
 
+function addEventListenerProjectCard(projectCard) {
+    projectCard.addEventListener('click' , () => {
+        currentProject.setCurrentProject(projectCard.innerHTML);
+    })
+}
+
 function addEventListenerImportantToggle(toggleImportant, taskIndex) {
     // Check if there's an existing event listener stored, and remove it
     if (toggleImportant._importantClickListener) {
@@ -21,7 +27,9 @@ function addEventListenerImportantToggle(toggleImportant, taskIndex) {
 
     toggleImportant._importantClickListener = () => {
         changeTaskProperty.toggleImportant(taskIndex);
-        displayTasks.renderTasksForProject(currentProject.getAppState().currentProject);
+        const currentProjectState = currentProject.getAppState().currentProject
+        // Refresh current project
+        currentProject.setCurrentProject(currentProjectState);
     };
 
     toggleImportant.addEventListener('click', toggleImportant._importantClickListener);
@@ -66,7 +74,6 @@ document.addEventListener("DOMContentLoaded", function() {
     const projectsPanel = document.getElementById('projectsPanel');
 
     allTasksTabBtn.addEventListener('click', () => {
-        displayTasks.renderTasksForProject('All');
         currentProject.setCurrentProject('All');
     });
 })();
@@ -75,7 +82,6 @@ document.addEventListener("DOMContentLoaded", function() {
     const todayTabBtn = document.getElementById('todayTab');
 
     todayTabBtn.addEventListener('click', () => {
-            displayTasks.renderTasksForProject('today');
             currentProject.setCurrentProject('today');
     });
 })();
@@ -84,20 +90,21 @@ document.addEventListener("DOMContentLoaded", function() {
     const importantTabBtn = document.getElementById('importantTab');
 
     importantTabBtn.addEventListener('click', () => {
-        displayTasks.renderTasksForProject('important');
         currentProject.setCurrentProject('important');
     })
 })();
 
 (function addEventListenerAddProjectInput() {
     const addProjectInput = document.getElementById('addProjectInput');
-    const projects = getProjectsFromStorage();
-
+    
     addProjectInput.addEventListener('keypress', event => {
+        const projects = getProjectsFromStorage();
         const inputValue = addProjectInput.value;
         if (event.key ==='Enter' && inputValue != '') {
             if (!projects.includes(inputValue)) {
                 populateStorageProjects(inputValue);
+                displayTasks.renderProjects();
+                event.target.value = ''; // Clear the input field after submitting
             }
         }
     })
@@ -137,4 +144,4 @@ function addEventListenerTaskTitle(taskTitle) {
     })
 }
 
-export { addEventListenerCompletionStatus, addEventListenerAddTaskInput, addEventListenerTaskTitle, addEventListenerTaskCard, addEventListenerImportantToggle, addEventListenerEditDueDate }
+export { addEventListenerCompletionStatus, addEventListenerAddTaskInput, addEventListenerTaskTitle, addEventListenerTaskCard, addEventListenerImportantToggle, addEventListenerEditDueDate, addEventListenerProjectCard }

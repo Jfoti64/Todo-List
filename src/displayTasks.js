@@ -1,8 +1,8 @@
-import { getTasksFromStorage } from "./getTasksFromStorage";
+import { getProjectsFromStorage, getTasksFromStorage } from "./getTasksFromStorage";
 import * as addEventListeners from "./addEventListeners";
 import * as changeTaskProperty from "./changeTaskProperty";
 import importantIconSrc from './icons/exclamation-mark-svgrepo-com.svg';
-import { format, parseISO, isSameDay, parseJSON } from 'date-fns';
+import { format, parseISO, isSameDay, parseJSON, add } from 'date-fns';
 import * as currentProject from "./currentProject";
 import hamburgerMenuIcon from './icons/hamburger-menu-svgrepo-com.svg';
 
@@ -16,6 +16,11 @@ function clearDom() {
     tasksContainer.innerHTML = '';
 }
 
+function clearProjectsDom() {
+    const projectsContainer = document.getElementById('projectsContainer');
+    projectsContainer.innerHTML = '';
+}
+
 // Function to render tasks based on the project
 function renderTasksForProject(projectName) {
     // Get tasks for the specified project from storage
@@ -25,6 +30,13 @@ function renderTasksForProject(projectName) {
     createProjectName();
     tasks.forEach(task => createNewTaskCard(task));
     createAddTaskInput();
+}
+
+function renderProjects() {
+    const projects = getProjectsFromStorage();
+    
+    clearProjectsDom();
+    projects.forEach(project => createNewProjectCard(project));
 }
 
 function openProjectsPanel(event) {
@@ -132,6 +144,16 @@ function closeEditPanel(event) {
     };
 }
 
+function createNewProjectCard(project) {
+    const projectsContainer = document.getElementById('projectsContainer');
+    const projectCard = document.createElement('div');
+    projectCard.classList.add('projectCard');
+    projectCard.innerHTML = project;
+
+    addEventListeners.addEventListenerProjectCard(projectCard);
+    projectsContainer.appendChild(projectCard);
+}
+
 function createNewTaskCard(obj) {
     const tasksContainer = document.getElementById('currentTasks');
     // Create the task card
@@ -183,4 +205,4 @@ function createNewTaskCard(obj) {
     tasksContainer.appendChild(taskCard);
 }
 
-export { editTaskTitle, openEditPanel, editDueDateElement, renderTasksForProject, openProjectsPanel, closeProjectsPanel, closeEditPanel }
+export { editTaskTitle, openEditPanel, editDueDateElement, renderTasksForProject, openProjectsPanel, closeProjectsPanel, closeEditPanel, renderProjects }

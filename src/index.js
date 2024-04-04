@@ -15,5 +15,6 @@ import { Task } from "./tasks";
 //let testing = new Task('title1', 'description1', formattedDate, true, true, 'project1');
 
 displayTasks.renderTasksForProject('All');
+displayTasks.renderProjects();
 
 // Log first object's title in tasks array from local storage
