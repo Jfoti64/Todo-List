@@ -1,7 +1,7 @@
 import { getProjectsFromStorage, getTasksFromStorage } from "./getTasksFromStorage";
 import * as addEventListeners from "./addEventListeners";
 import importantIconSrc from './icons/exclamation-mark-svgrepo-com.svg';
-import { format, parseISO, isSameDay, parseJSON, add } from 'date-fns';
+import { format, parseISO } from 'date-fns';
 import * as currentProject from "./currentProject";
 import hamburgerMenuIcon from './icons/hamburger-menu-svgrepo-com.svg';
 

@@ -2,7 +2,7 @@ import * as changeTaskProperty from "./changeTaskProperty";
 import { Task } from './tasks';
 import * as displayTasks from "./displayTasks";
 import { getProjectsFromStorage } from "./getTasksFromStorage";
-import { addHours, startOfToday } from 'date-fns';
+import {  addHours, startOfToday } from 'date-fns';
 import * as currentProject from "./currentProject";
 import { populateStorageProjects } from "./populateStorage";
 
@@ -141,30 +141,41 @@ function addEventListenerAddTaskInput() {
     });  
 }
 
-function addEventListenerPanelTaskTitle(taskIndex, taskToEdit) {
-    taskToEdit.addEventListener('click', (event) => {
-        displayTasks.displayTitleEditor(event);
-        const titleEditor = document.getElementById('titleEditor');
-        // When focus is lost from the title editor, save the new title and switch back to the <h3>
-        titleEditor.addEventListener('blur', function() {
-            const updatedTitle = titleEditor.value;
-            
-            // Trigger saving the updated title to task storage
-            changeTaskProperty.editTitle(taskIndex, updatedTitle);
-
-            // Recreate the task title <h3>
-            const newTaskTitle = document.createElement('h3');
-            newTaskTitle.textContent = updatedTitle;
-            newTaskTitle.id = 'taskToEdit'; // Make sure to reassign the id or any needed class
-            
-            // Replace the title editor with the new task title <h3>
-            titleEditor.parentNode.replaceChild(newTaskTitle, titleEditor);
-
-            // Refresh current project
-            const currentProjectTab = currentProject.getAppState().currentProject;
-            currentProject.setCurrentProject(currentProjectTab);
-        });
-    });
+// Define the click event handler as a named function
+function handleTaskTitleClick(event, taskIndex) {
+    displayTasks.displayTitleEditor(event);
+    const titleEditor = document.getElementById('titleEditor');
+    // Ensure there's only one blur event listener attached to the titleEditor
+    titleEditor.onblur = null; // Remove previous listener to prevent duplicates
+    titleEditor.onblur = () => handleTitleEditorBlur(taskIndex, titleEditor);
 }
+
+// Define the blur event handler as a named function
+function handleTitleEditorBlur(taskIndex, titleEditor) {
+    const updatedTitle = titleEditor.value;
+    // Trigger saving the updated title to task storage
+    changeTaskProperty.editTitle(taskIndex, updatedTitle);
+    // Recreate the task title <h3>
+    const newTaskTitle = document.createElement('h3');
+    newTaskTitle.textContent = updatedTitle;
+    newTaskTitle.id = 'taskToEdit'; // Make sure to reassign the id or any needed class
+    // Replace the title editor with the new task title <h3>
+    titleEditor.parentNode.replaceChild(newTaskTitle, titleEditor);
+    // Reattach the event listener to the new title element for further edits
+    newTaskTitle.addEventListener('click', (event) => handleTaskTitleClick(event, taskIndex));
+    // Refresh current project
+    const currentProjectTab = currentProject.getAppState().currentProject;
+    currentProject.setCurrentProject(currentProjectTab);
+}
+
+// The function to add the event listener to the task title element
+function addEventListenerPanelTaskTitle(taskIndex, taskToEdit) {
+    // Remove any existing click event listener to prevent duplicates
+    taskToEdit.removeEventListener('click', taskToEdit.clickEventListener);
+    // Attach the new event listener
+    taskToEdit.clickEventListener = (event) => handleTaskTitleClick(event, taskIndex);
+    taskToEdit.addEventListener('click', taskToEdit.clickEventListener);
+}
+
 
 export { addEventListenerCompletionStatus, addEventListenerAddTaskInput, addEventListenerTaskCard, addEventListenerImportantToggle, addEventListenerEditDueDate, addEventListenerProjectCard, addEventListenerPanelTaskTitle }

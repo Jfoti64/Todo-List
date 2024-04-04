@@ -10,10 +10,12 @@ class Task {
         this.completionStatus = completionStatus;
         this.important = important;
         this.project = project;
+        // Temporarily set index, but it will be updated correctly in updateIndexes
         this.index = getTasksFromStorage().length;
-        updateIndexes();
-        populateStorage(this);
+        populateStorage(this); // Add the task first
+        updateIndexes(); // Now update indexes with the new task included
     }
 }
+
 
 export { Task };
