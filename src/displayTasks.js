@@ -147,6 +147,20 @@ function createNewTaskCard(obj) {
     completionStatus.checked = obj.completionStatus;
     taskCard.appendChild(completionStatus);
 
+    const roundCheckbox = document.createElement('label');
+    roundCheckbox.for = 'completionStatus';
+    taskCard.appendChild(roundCheckbox);
+
+    // If completion status is true strikethrough task's title.
+    if (obj.completionStatus == true) {
+        taskCard.classList.add('grayed-out-text');
+    }
+    else if (obj.completionStatus == false) {
+        taskCard.classList.remove('grayed-out-text');
+    }
+
+
+
     addEventListeners.addEventListenerCompletionStatus(completionStatus);
 
 

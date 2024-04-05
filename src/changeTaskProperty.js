@@ -4,6 +4,9 @@ import { getProjectsFromStorage, getTasksFromStorage } from "./getTasksFromStora
 function updateTasksInStorage(updatedTasks) {
     const indexedTasks = updateIndexes(updatedTasks);
     localStorage.setItem('tasks', JSON.stringify(indexedTasks));
+    // Refresh current project tab
+    const currentProjectTab = currentProject.getAppState().currentProject;
+    currentProject.setCurrentProject(currentProjectTab);
 }
 
 function updateProjectsInStorage(updatedProjects) {
@@ -30,9 +33,6 @@ function deleteTaskFromStorage(taskIndex) {
 
     // Save the modified tasks array back to localStorage
     updateTasksInStorage(filteredTasks);
-    // Refresh current project tab
-    const currentProjectTab = currentProject.getAppState().currentProject;
-    currentProject.setCurrentProject(currentProjectTab);
 }
 
 

@@ -88,9 +88,8 @@ h3 {
 
 .taskCard {
     height: 90px;
-
     display: grid;
-    grid-template-columns: 25px repeat(4, 1fr);
+    grid-template-columns: 45px repeat(4, 1fr);
     grid-template-rows: repeat(2, 1fr);
     border-radius: 8px;
     background-color: var(--taskColor)
@@ -100,6 +99,26 @@ h3 {
     grid-row: 1 / -1;
 }
 
+.grayed-out-text {
+    color: #808080;
+}
+
+/* Hide the default checkbox */
+.completionStatus {
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border: 2px solid #000000; /* Border color */
+    border-radius: 50%; /* Round shape */
+    cursor: pointer;
+    background: white; /* Background of the checkbox */
+    place-self: center;
+  }
+  
+  /* Style for when the checkbox is checked */
+  .completionStatus:checked {
+    background-color: #023e8a; /* Background color when checked */
+  }
 
 .projectLabel, .dueDate {
     grid-row: 2;
