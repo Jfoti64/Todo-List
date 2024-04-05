@@ -76,7 +76,8 @@ function addEventListenerDeleteBtn(deleteBtn, taskIndex) {
 }
 
 function handleDeleteClick(taskIndex) {
-    
+    // Logic to remove task from storage
+    changeTaskProperty.deleteTaskFromStorage(taskIndex);
 }
 
 

@@ -1,6 +1,5 @@
 import { getTasksFromStorage } from './getTasksFromStorage';
 import { populateStorage } from './populateStorage';
-import { updateIndexes } from './updateIndexes';
 
 class Task {
     constructor(title, description, dueDate, completionStatus, important, project) {
@@ -13,7 +12,6 @@ class Task {
         // Temporarily set index, but it will be updated correctly in updateIndexes
         this.index = getTasksFromStorage().length;
         populateStorage(this); // Add the task first
-        updateIndexes(); // Now update indexes with the new task included
     }
 }
 

@@ -1,12 +1,40 @@
+import * as currentProject from "./currentProject";
 import { getProjectsFromStorage, getTasksFromStorage } from "./getTasksFromStorage";
 
 function updateTasksInStorage(updatedTasks) {
-    localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+    const indexedTasks = updateIndexes(updatedTasks);
+    localStorage.setItem('tasks', JSON.stringify(indexedTasks));
 }
 
 function updateProjectsInStorage(updatedProjects) {
     localStorage.setItem('projects', JSON.stringify(updatedProjects));
 }
+
+function updateIndexes(tasks) {
+    tasks.forEach((task, idx) => {
+        task.index = idx;
+    });
+
+    return tasks;
+}
+
+function deleteTaskFromStorage(taskIndex) {
+    // Retrieve the tasks array from localStorage
+    const tasks = getTasksFromStorage();
+
+    // Convert taskIndex to a number
+    const numericTaskIndex = Number(taskIndex);
+
+    // Filter out the task to delete
+    const filteredTasks = tasks.filter(task => task.index !== numericTaskIndex);
+
+    // Save the modified tasks array back to localStorage
+    updateTasksInStorage(filteredTasks);
+    // Refresh current project tab
+    const currentProjectTab = currentProject.getAppState().currentProject;
+    currentProject.setCurrentProject(currentProjectTab);
+}
+
 
 function editTaskProperty(taskIndex, propertyName, newValue) {
     const tasks = getTasksFromStorage();
@@ -49,4 +77,4 @@ function editProject(taskIndex, newProject) {
 }
 
 
-export { editTitle, editDescription, editDueDate, toggleCompletionStatus, toggleImportant, editProject };
+export { editTitle, editDescription, editDueDate, toggleCompletionStatus, toggleImportant, editProject, deleteTaskFromStorage };
