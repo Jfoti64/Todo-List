@@ -63,6 +63,23 @@ function addEventListenerCompletionStatus(completionStatus) {
     });
 }
 
+function addEventListenerDeleteBtn(deleteBtn, taskIndex) {
+    if (deleteBtn._currentDeleteListener) {
+        deleteBtn.removeEventListener('click', deleteBtn._currentDeleteListener);
+    }
+
+    // Create a new listener function and assign it to the button's property
+    deleteBtn._currentDeleteListener = () => handleDeleteClick(taskIndex);
+
+    // Add the new event listener using the stored reference
+    deleteBtn.addEventListener('click', deleteBtn._currentDeleteListener);
+}
+
+function handleDeleteClick(taskIndex) {
+    
+}
+
+
 document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('click', function(event) {
         displayTasks.closeEditPanel(event);
@@ -169,4 +186,7 @@ function addEventListenerPanelTaskTitle(taskIndex, taskToEdit) {
 }
 
 
-export { addEventListenerCompletionStatus, addEventListenerAddTaskInput, addEventListenerTaskCard, addEventListenerImportantToggle, addEventListenerEditDueDate, addEventListenerProjectCard, addEventListenerPanelTaskTitle }
+export  { 
+            addEventListenerCompletionStatus, addEventListenerAddTaskInput, addEventListenerTaskCard, addEventListenerImportantToggle, 
+            addEventListenerEditDueDate, addEventListenerProjectCard, addEventListenerPanelTaskTitle, addEventListenerDeleteBtn 
+        }

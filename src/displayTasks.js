@@ -95,11 +95,13 @@ const openEditPanel = (taskIndex, event) => {
     const editDueDate = document.getElementById('editDueDate');
     const editImportance = document.getElementById('editImportance');
     const taskToEdit = document.getElementById('taskToEdit');
+    const deleteBtn = document.getElementById('deleteBtn');
     taskToEdit.value = taskInStorage.title || ''; // Set to current task title
     editImportance.checked = taskInStorage.important;
     addEventListeners.addEventListenerImportantToggle(editImportance, taskIndex);
     addEventListeners.addEventListenerEditDueDate(editDueDate, taskIndex);
     addEventListeners.addEventListenerPanelTaskTitle(taskIndex, taskToEdit);
+    addEventListeners.addEventListenerDeleteBtn(deleteBtn, taskIndex);
 
     editDueDate.value = formattedDate;
     document.getElementById('taskEditPanel').classList.add('open');
