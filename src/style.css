@@ -1,24 +1,27 @@
- body {
+html {
     height: 100%;
-    margin: 0;
-    display: grid;
-    grid-template-rows: auto 1fr auto;
 }
-
 
 body {
     display: grid;
-    height: 1;
-    grid-template-rows: 80px 100% 50px;
+    height: 100vh;
+    grid-template-rows: 80px 1fr 50px;
+    margin: 0;
 }
 
-div {
-    background-color: #d61313;
-}
-
-header {
-    background-color: blue;
-}
+body::before {
+    content: '';
+    display: block;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    background-image: url('./images/yuriy-kovalev-nN1HSDtKdlw-unsplash.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(8px); /* Adjust the px value to increase or decrease the amount of blur */
+  }
 
 #hamburgerMenu {
     width: 60px;
@@ -41,7 +44,7 @@ h3 {
 
 .taskCard {
     height: 90px;
-    background-color: rgb(123, 44, 180);
+
     display: grid;
     grid-template-columns: 25px repeat(4, 1fr);
     grid-template-rows: repeat(2, 1fr);
@@ -79,7 +82,7 @@ h3 {
 }
 
 footer {
-    background-color: green;
+
 
 }
 
@@ -89,7 +92,7 @@ footer {
     right: -100%; /* Start off-screen */
     width: 300px; /* Or any desired width */
     height: 100%;
-    background-color: white;
+
     box-shadow: -2px 0 5px rgba(0,0,0,0.5);
     transition: right 0.5s; /* Smooth slide-in effect */
     padding: 20px;
@@ -106,7 +109,7 @@ footer {
     left: -100%; /* Start off-screen */
     width: 300px; /* Or any desired width */
     height: 100%;
-    background-color: white;
+
     box-shadow: -2px 0 5px rgba(0,0,0,0.5);
     transition: left 0.5s; /* Corrected transition property */
     padding: 20px;
