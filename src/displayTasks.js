@@ -151,16 +151,16 @@ function createNewTaskCard(obj) {
     title.innerHTML = obj.title;
     taskCard.appendChild(title);
 
-    // Create description
-    const description = document.createElement('p');
-    description.classList.add('description');
-    description.innerHTML = obj.description;
-    taskCard.appendChild(description);
+    // Create projectLabel
+    const projectLabel = document.createElement('p');
+    projectLabel.classList.add('projectLabel');
+    projectLabel.innerHTML = obj.project;
+    taskCard.appendChild(projectLabel);
 
     // Create dueDate
     const dueDate = document.createElement('p');
     dueDate.classList.add('dueDate');
-    dueDate.innerHTML = format(obj.dueDate, 'yyyy-MM-dd');
+    dueDate.innerHTML = 'Due: ' + format(obj.dueDate, 'EEEE, LLL do yyyy');
     taskCard.appendChild(dueDate);
 
     // Create the important signifier

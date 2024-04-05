@@ -1,8 +1,26 @@
+
+
+:root {
+    --taskColor: rgba(255, 255, 255, 0.484);
+    --panelColor: #eeeeee;
+  }
+
 html {
     height: 100%;
 }
 
+header {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+}
+
+header img, header h1 {
+    margin: 0px;
+    align-self: center;
+}
+
 body {
+    font-family: 'Roboto', sans-serif;
     display: grid;
     height: 100vh;
     grid-template-rows: 80px 1fr 50px;
@@ -21,7 +39,15 @@ body::before {
     background-position: center;
     background-repeat: no-repeat;
     filter: blur(8px); /* Adjust the px value to increase or decrease the amount of blur */
-  }
+}
+
+#projectsPanel {
+    background-color: var(--panelColor);
+}
+
+#taskEditPanel {
+    background-color: var(--panelColor);
+}
 
 #hamburgerMenu {
     width: 60px;
@@ -32,8 +58,18 @@ h3 {
     font-size: 3rem;
 }
 
+.taskCard h5 {
+    font-size: 20px;
+    text-wrap: wrap;
+    overflow: auto;
+    padding: 4px 0px;
+    
+    
+}
+
 .taskCard h5, .taskCard p {
     margin: 0px;
+    align-self: center;
 }
 
 #currentTasks {
@@ -48,7 +84,8 @@ h3 {
     display: grid;
     grid-template-columns: 25px repeat(4, 1fr);
     grid-template-rows: repeat(2, 1fr);
-    border: solid black 3px;
+    border-radius: 8px;
+    background-color: var(--taskColor)
 }
 
 .completionStatus {
@@ -56,7 +93,7 @@ h3 {
 }
 
 
-.description, .dueDate {
+.projectLabel, .dueDate {
     grid-row: 2;
 }
 
@@ -66,34 +103,31 @@ h3 {
 }
 
 
-
-.importantIcon
-
 #addTaskDiv {
     display: grid;
     grid-template-columns: 25px 1fr;
     height: 90px;
+    border-radius: 8px;
+}
+
+#addTaskDiv input {
+    border-radius: 8px;
 }
 
 #addTaskInput {
-    grid-column: 2;
+    grid-column: 1 / 3;
     width: 100%;
     height: 80px;
-}
-
-footer {
-
-
 }
 
 .task-edit-panel {
     position: fixed;
     top: 0;
     right: -100%; /* Start off-screen */
-    width: 300px; /* Or any desired width */
+    width: 375px; /* Or any desired width */
     height: 100%;
 
-    box-shadow: -2px 0 5px rgba(0,0,0,0.5);
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,.4), 0 6px 20px 0 rgba(0,0,0,.4);
     transition: right 0.5s; /* Smooth slide-in effect */
     padding: 20px;
 }
@@ -107,10 +141,10 @@ footer {
     position: fixed;
     top: 0;
     left: -100%; /* Start off-screen */
-    width: 300px; /* Or any desired width */
+    width: 375px; /* Or any desired width */
     height: 100%;
 
-    box-shadow: -2px 0 5px rgba(0,0,0,0.5);
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,.4), 0 6px 20px 0 rgba(0,0,0,.4);
     transition: left 0.5s; /* Corrected transition property */
     padding: 20px;
 }
