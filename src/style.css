@@ -1,5 +1,3 @@
-
-
 :root {
     --taskColor: rgba(255, 255, 255, 0.484);
     --panelColor: #eeeeee;
@@ -62,9 +60,7 @@ h3 {
     font-size: 20px;
     text-wrap: wrap;
     overflow: auto;
-    padding: 4px 0px;
-    
-    
+    padding: 4px 0px;    
 }
 
 .taskCard h5, .taskCard p {
@@ -72,10 +68,22 @@ h3 {
     align-self: center;
 }
 
+.taskCard p, #currentDate {
+    font-size: 18px;
+}
+
+#currentDate {
+    font-weight: 1000;
+}
+
 #currentTasks {
     display: grid;
     gap: 20px;
     margin: 30px;
+}
+
+#currentTasks > h2, #currentTasks > p {
+    margin: 0px;
 }
 
 .taskCard {

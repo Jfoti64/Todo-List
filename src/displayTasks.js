@@ -70,6 +70,11 @@ function createProjectName() {
     projectName.innerHTML = currentProject.getAppState().currentProject;
     projectName.id = 'projectName';
     tasksContainer.appendChild(projectName);
+
+    const currentDate = document.createElement('p');
+    currentDate.id = 'currentDate';
+    currentDate.innerHTML = format(new Date(), 'EEEE, LLL do yyyy');
+    tasksContainer.appendChild(currentDate);
 }
 
 function editDueDateElement(taskIndex) {
@@ -160,7 +165,7 @@ function createNewTaskCard(obj) {
     // Create dueDate
     const dueDate = document.createElement('p');
     dueDate.classList.add('dueDate');
-    dueDate.innerHTML = 'Due: ' + format(obj.dueDate, 'EEEE, LLL do yyyy');
+    dueDate.innerHTML = 'Due: ' + format(obj.dueDate, 'EEEE, LLL do');
     taskCard.appendChild(dueDate);
 
     // Create the important signifier
