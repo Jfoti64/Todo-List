@@ -184,11 +184,7 @@ function createNewTaskCard(obj) {
 
     // Create the important signifier
     if (obj.important) {
-        const importantIcon = document.createElement('img');
-        importantIcon.classList.add('importantIcon');
-        importantIcon.src = importantIconSrc;
-        importantIcon.alt = 'Important Task';
-        taskCard.appendChild(importantIcon);
+        taskCard.classList.add('important');
     }
     
     tasksContainer.appendChild(taskCard);

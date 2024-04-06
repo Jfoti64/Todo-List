@@ -100,6 +100,18 @@ h3 {
     
 }
 
+.taskCard:hover, #hamburgerMenu:hover {
+    background-color: rgba(255, 255, 255, 0.584);
+}
+
+.important {
+    border: 2px solid gold;
+}
+
+#hamburgerMenu {
+    border-radius: 8px;
+}
+
 .completionStatus {
     grid-row: 1 / -1;
 }
@@ -189,25 +201,9 @@ h3 {
     left: 0;
 }
 
-
-
-
-
 footer {
     text-align: center;
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 .projects-panel {
     background: #ffffff; /* White background */
@@ -258,6 +254,12 @@ footer {
   
   #addProject {
     margin-top: 10px;
+    text-align: center;
+  }
+
+  #addProject input{
+    text-align: center;
+    padding: 10px 0px;
   }
   
   #addProjectInput {
@@ -267,34 +269,6 @@ footer {
     border-radius: 5px;
     font-size: 16px;
   }
-
-  
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 .task-edit-panel {
     background: #ffffff; /* White background for the edit panel */
