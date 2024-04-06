@@ -6,44 +6,46 @@
     <title>Todo List</title>
 </head>
 <body>
-    <header>
-        <img id="hamburgerMenu"/>
-        <h1>Todo List</h1>
-    </header>
-    <div id="centerContent">
-        <div id="currentTasks">
-            <div id="addTask"></div>
+    <div id="gridContainer">
+        <header>
+            <img id="hamburgerMenu"/>
+            <h1>Todo List</h1>
+        </header>
+        <div id="centerContent">
+            <div id="currentTasks">
+                <div id="addTask"></div>
+            </div>
         </div>
-    </div>
-    <!-- Slide-in panel for projects -->
-    <div id="projectsPanel" class="projects-panel">
-        <!-- Projects content -->
-        <button id="allTab">All</button>
-        <button id="todayTab">Today</button>
-        <button id="importantTab">Important</button>
-        <h2>Projects</h2>
-        <div id="projectsContainer">
-
+        <!-- Slide-in panel for projects -->
+        <div id="projectsPanel" class="projects-panel">
+            <!-- Projects content -->
+            <div id="projectsPanelTop">
+                <button id="allTab">All</button>
+                <button id="todayTab">Today</button>
+                <button id="importantTab">Important</button>
+            </div>
+            <div id="projectsPanelBottom">
+                <h2>Projects</h2>
+                <div id="projectsContainer"></div>
+            </div>
+            <div id="addProject">
+                <input type="text" placeholder="Add Project" id="addProjectInput">
+            </div>
         </div>
-        <div id="addProject">
-            <span>+</span>
-            <input type="text" placeholder="Add Project" id="addProjectInput">
-        </div>
-    </div>
-    <!-- Slide-in panel for task editing -->
-    <div id="taskEditPanel" class="task-edit-panel">
-        <!-- Content for editing a task -->
-        <input type="text" name="taskToEdit" id="taskToEdit">
-        <label for="editDueDate">Due Date:</label>
-        <input type="date" id="editDueDate">
+        <!-- Slide-in panel for task editing -->
+        <div id="taskEditPanel" class="task-edit-panel">
+            <!-- Content for editing a task -->
+            <input type="text" name="taskToEdit" id="taskToEdit">
+            <label for="editDueDate">Due Date:</label>
+            <input type="date" id="editDueDate">
         
-        <label for="editImportance">Importance:</label>
-        <input type="checkbox" id="editImportance">
-
-        <button id="deleteBtn">Delete</button>
+            <label for="editImportance">Importance:</label>
+            <input type="checkbox" id="editImportance">
+            <button id="deleteBtn">Delete</button>
+        </div>
+        <footer>
+            <h4>JFoti64</h4>
+        </footer>
     </div>
-    <footer>
-        <h4>JFoti64</h4>
-    </footer>
 <script defer src="main.js"></script></body>
 </html>

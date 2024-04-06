@@ -25,6 +25,10 @@ body {
     margin: 0;
 }
 
+#gridContainer {
+    padding: 0px 48px;
+}
+
 body::before {
     content: '';
     display: block;
@@ -79,7 +83,7 @@ h3 {
 #currentTasks {
     display: grid;
     gap: 20px;
-    margin: 30px;
+    padding: 30px;
 }
 
 #currentTasks > h2, #currentTasks > p {
@@ -89,10 +93,11 @@ h3 {
 .taskCard {
     height: 90px;
     display: grid;
-    grid-template-columns: 45px repeat(4, 1fr);
+    grid-template-columns: 45px 150px 1fr;
     grid-template-rows: repeat(2, 1fr);
     border-radius: 8px;
     background-color: var(--taskColor)
+    
 }
 
 .completionStatus {
@@ -124,27 +129,30 @@ h3 {
     grid-row: 2;
 }
 
+.title {
+    grid-row: 1;
+    grid-column: 2 / -1;
+}
+
 .importantIcon {
     width: 30px;
     height: 30px;
 }
 
-
 #addTaskDiv {
     display: grid;
     grid-template-columns: 25px 1fr;
     height: 90px;
-    border-radius: 8px;
-}
-
-#addTaskDiv input {
-    border-radius: 8px;
 }
 
 #addTaskInput {
     grid-column: 1 / 3;
     width: 100%;
-    height: 80px;
+    height: 50px;
+    border-radius: 8px;
+    background-color: var(--taskColor);
+    border: none;
+    font-size: 20px;
 }
 
 .task-edit-panel {
@@ -170,6 +178,7 @@ h3 {
     left: -100%; /* Start off-screen */
     width: 375px; /* Or any desired width */
     height: 100%;
+    overflow: auto;
 
     box-shadow: 0 4px 8px 0 rgba(0,0,0,.4), 0 6px 20px 0 rgba(0,0,0,.4);
     transition: left 0.5s; /* Corrected transition property */
@@ -180,3 +189,160 @@ h3 {
     left: 0;
 }
 
+
+
+
+
+footer {
+    text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.projects-panel {
+    background: #ffffff; /* White background */
+    box-shadow: -2px 0 5px rgba(0,0,0,0.2); /* Shadow to the left */
+    padding: 15px;
+    box-sizing: border-box;
+    overflow-y: auto; /* Allows scrolling */
+    display: flex;
+    flex-direction: column;
+  }
+  
+  #projectsPanelTop button {
+    background: none;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    width: 100%;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  #projectsPanelTop button:hover {
+    background-color: #d7d5d5;
+  }
+  
+  #projectsPanelBottom {
+    flex-grow: 1; /* Take up remaining space */
+  }
+  
+  #projectsPanelBottom h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .projectCard {
+    background: #f2f2f2;
+    border: none;
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .projectCard:hover {
+    background-color: #d7d5d5;
+  }
+  
+  #addProject {
+    margin-top: 10px;
+  }
+  
+  #addProjectInput {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.task-edit-panel {
+    background: #ffffff; /* White background for the edit panel */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    padding: 20px;
+    box-sizing: border-box; /* Include padding in the width and height */
+    overflow-y: auto; /* Allow scrolling for overflow content */
+  }
+  
+  .task-edit-panel input[type="text"],
+  .task-edit-panel input[type="date"],
+  .task-edit-panel input[type="checkbox"],
+  .task-edit-panel button {
+    width: 100%; /* Full width */
+    margin-bottom: 15px; /* Spacing between elements */
+    border: 1px solid #ccc; /* Subtle border */
+    border-radius: 5px; /* Slightly rounded corners */
+    padding: 10px; /* Comfortable padding inside inputs and button */
+    box-sizing: border-box; /* Include padding in the width */
+  }
+  
+  .task-edit-panel input[type="text"],
+  .task-edit-panel input[type="date"] {
+    font-size: 16px; /* Readable font size */
+  }
+  
+  .task-edit-panel input[type="checkbox"] {
+    transform: scale(1.5); /* Larger checkbox for easy interaction */
+    margin-right: 10px; /* Space before the label */
+    vertical-align: middle; /* Align with the text */
+  }
+  
+  .task-edit-panel label {
+    display: block; /* Full width */
+    margin-bottom: 5px; /* Space above inputs */
+    font-weight: bold; /* Bold label text */
+  }
+  
+  .task-edit-panel button {
+    background: #007bff; /* Bootstrap primary button color */
+    color: #ffffff; /* White text */
+    font-weight: bold; /* Bold button text */
+    border: none; /* No border */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth background transition */
+  }
+  
+  .task-edit-panel button:hover {
+    background: #0056b3;
+  }
+  

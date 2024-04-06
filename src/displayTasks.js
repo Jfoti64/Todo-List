@@ -57,7 +57,7 @@ function createAddTaskInput() {
     const addTaskInput = document.createElement('input');
     addTaskInput.id = 'addTaskInput';
     addTaskInput.type = 'text';
-    addTaskInput.placeholder = 'Add Task';
+    addTaskInput.placeholder = 'Add a task';
     const tasksContainer = document.getElementById('currentTasks');
     addTaskInputDiv.appendChild(addTaskInput);
     tasksContainer.appendChild(addTaskInputDiv);
