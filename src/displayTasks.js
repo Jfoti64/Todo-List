@@ -179,6 +179,7 @@ function createNewTaskCard(obj) {
     // Create dueDate
     const dueDate = document.createElement('p');
     dueDate.classList.add('dueDate');
+    console.log(obj.dueDate);
     dueDate.innerHTML = 'Due: ' + format(obj.dueDate, 'EEEE, LLL do');
     taskCard.appendChild(dueDate);
 
